@@ -1,0 +1,26 @@
+#loading_frame{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+}
+
+#loading_frame span{
+    font-size: 28px;
+    font-weight: 800;
+    color: rgb(28, 22, 98);
+}
+
+#loading_frame i{
+    animation: rotate 3s infinite linear;
+    color: rgb(28, 22, 98);
+}
+
+@keyframes rotate{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

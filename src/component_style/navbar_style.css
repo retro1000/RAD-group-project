@@ -1,0 +1,112 @@
+#navbar_frame{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+#navbar_frame nav ul{
+    width: 97%;
+    height: 60px;
+    background: rgb(209, 228, 227);
+}
+
+#navbar_frame nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    background: rgb(209, 228, 227);
+}
+
+#navbar_frame nav ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0 10px;
+}
+
+#navbar_frame nav ul #nav_sec{
+    width: 750px;
+}
+
+#navbar_frame nav ul #nav_sec ul{
+    display: flex;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#navbar_frame nav ul #nav_sec ul li{
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#navbar_frame nav ul #nav_sec ul .current_page{
+    transform: translateY(-3px);
+    font-size: 25px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#navbar_frame nav ul #nav_sec ul .current_page::after{
+    content: "";
+    display: block;
+    border-bottom: 5px solid rgb(72, 70, 70);
+    width: 60px;
+    left: 0;
+    cursor: pointer;
+}
+
+#navbar_frame nav ul #nav_sec ul .nav_topic{
+    padding: 0 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#navbar_frame nav ul #nav_sec ul .nav_topic:hover{
+    transform: translateY(-3px);
+    font-size: 25px;
+}
+
+#navbar_frame nav ul #nav_sec ul .nav_topic:hover::after{
+    content: "";
+    display: block;
+    border-bottom: 5px solid rgb(72, 70, 70);
+    width: 0;
+    left: 0;
+    animation-name: und_anim;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+}
+
+#navbar_frame nav ul #setting_sec i{
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+}
+
+#navbar_frame nav ul #setting_sec #profile{
+    margin-right: 10px;
+}
+
+#navbar_frame nav ul #setting_sec i svg{
+    transition: 0.2s ease-in-out;
+}
+
+#navbar_frame nav ul #setting_sec i svg:hover{
+    transform: translateY(-3px);
+}
+
