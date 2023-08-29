@@ -64,8 +64,7 @@ function Login(props) {
                 </form>
             </div>
             <div id='link_section'>
-                <a href='/vivolk/forgot_password'>Forgot your password?</a>
-                <a href='/vivolk/signup'>Don't have an account?</a>
+                <a href='/signup'>Don't have an account?</a>
             </div>
         </div>
     )
