@@ -1,8 +1,13 @@
-const mongoose = require('mongoose');
+import { Schema as _Schema, model } from 'mongoose';
 
-const Schema = mongoose.Schema;
+const Schema = _Schema;
 
 const userSchema = new Schema({
+    userId:{
+        type: Number,
+        required: true,
+        unique: true
+    },
     name:{
         type: String,
         required: true,
@@ -28,10 +33,20 @@ const userSchema = new Schema({
     password:{
         type: String,
         required: true
+    },
+    heigth:{
+        type: Number
+    },
+    weigth:{
+        type: Number
+    },
+    workouts:{
+        type:[Map],
+        of: _Schema.Type.Mixed
     }
 
 }, {timestamps:true});
 
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
-module.exports = User;
+export default User;
