@@ -8,7 +8,12 @@ router.route('', '/').get((req, res) => {
 });
 
 router.route('', '/').post((req, res) => {
-    
+    try{
+
+    }catch(err){
+        console.log('Error:', err);
+        res.status(500).json({error: 'An error occured.'});
+    }
 });
 
 module.exports = router;

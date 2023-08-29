@@ -1,4 +1,5 @@
 import { Schema as _Schema, model } from 'mongoose';
+import Role from './role.model';
 
 const Schema = _Schema;
 
@@ -40,11 +41,15 @@ const userSchema = new Schema({
     weigth:{
         type: Number
     },
+    //map=>(workout, duration, status, periodCal, etc)
     workouts:{
         type:[Map],
         of: _Schema.Type.Mixed
+    },
+    roles:{
+        type:[Role],
+        required: true
     }
-
 }, {timestamps:true});
 
 const User = model('User', userSchema);

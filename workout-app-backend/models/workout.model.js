@@ -21,6 +21,11 @@ const workoutSchema = new Schema({
     gender:{
         type: [String]
     },
+    period:{
+        type: Number,
+        required: true
+    },
+    // map=>(exercise, time, rounds, etc)
     exercises:{
         type: [Map],
         of: _Schema.Types.Mixed,

@@ -1,10 +1,11 @@
 import { Schema as _Schema, model } from 'mongoose';
+import BodyPart from './bodyPart.model';
 
 const Schema = _Schema;
 
 const exersiceSchema = new Schema({
     exersiceId:{
-        type: String,
+        type: Number,
         required: true,
         unique: true
     },
@@ -28,7 +29,7 @@ const exersiceSchema = new Schema({
         required: true
     },
     bodyParts:{
-        type:[bodyPartSchema],
+        type:[BodyPart],
         required: true
     },
     images:{
