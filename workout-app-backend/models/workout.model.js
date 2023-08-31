@@ -25,7 +25,7 @@ const workoutSchema = new Schema({
         type: Number,
         required: true
     },
-    // map=>(exercise, time, rounds, etc)
+    // map=>(exerciseId, time, rounds, etc)
     exercises:{
         type: [Map],
         of: _Schema.Types.Mixed,

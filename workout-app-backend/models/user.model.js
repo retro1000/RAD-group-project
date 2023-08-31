@@ -41,7 +41,7 @@ const userSchema = new Schema({
     weigth:{
         type: Number
     },
-    //map=>(workout, duration, status, periodCal, etc)
+    //map=>(workout, time, duration, status, periodCal, etc)
     workouts:{
         type:[Map],
         of: _Schema.Type.Mixed

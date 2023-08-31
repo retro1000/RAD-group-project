@@ -28,13 +28,17 @@ const exersiceSchema = new Schema({
         type:[String],
         required: true
     },
-    bodyParts:{
-        type:[BodyPart],
+    mainImage:{
+        type: String,
         required: true
     },
     images:{
         type:[String],
         required:true
+    },
+    bodyPartIds:{
+        type: [Number],
+        required: true
     }
 }, {timestamps:true});
 

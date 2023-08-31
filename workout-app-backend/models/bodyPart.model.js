@@ -17,6 +17,12 @@ const bodyPartSchema = new Schema({
     image:{
         type: String,
         required: true
+    },
+    workouts:{
+        type: [Number]
+    },
+    exersices:{
+        type: [Number]
     }
 
 }, {timestamps:true});

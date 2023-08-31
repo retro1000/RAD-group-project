@@ -1,15 +1,11 @@
-import {reactPort} from '../server_config.js';
-
 const router = require('express').Router();
-const User = require('../models/user.model');
+const UserQueries = require('../queries/user.query.js');
 
-router.route('', '/').get((req, res) => {
-    res.render(`http://localhost:${reactPort}/login`);
-});
-
-router.route('', '/').post((req, res) => {
+router.route('', '/').post(async(req, res) => {
     try{
-
+        const {firstname, lastname, username, age, gender, heigth, weigth, password} = req.body;
+        UserQueries.createNewUser(`${firstname} ${lastname}`, username, password, age, gender, heigth, weigth);
+        res.status(201).json({ message: 'User registered successfully.' });
     }catch(err){
         console.log('Error:', err);
         res.status(500).json({error: 'An error occured.'});
