@@ -1,14 +1,15 @@
 import mongoose, { Error, Mongoose } from "mongoose";
 import User from "../models/exersice.model";
 import { startSession } from "mongoose";
+import bcrypt from 'bcrypt';
 
 const RoleQuery = require("../queries/role.query");
 const WorkoutQuery = require("../queries/workout.query");
 const CommonQueries = require('../queries/common.query');
 
-const getUserByUsername = async(username) => {
+const getUserByUsername = (username) => {
     try{
-        return await User.findOne({username: username})
+        return User.findOne({username: username})
             .select('userId', 'username', 'password', 'roles')|| (()=>{throw new Error('No username found');})();
     }catch(err){
         throw err;
