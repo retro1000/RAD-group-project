@@ -1,10 +1,10 @@
 import passport, { initialize } from "passport";
 import expressSession from "express-session";
-import {app} from "./server_config.js";
+import {app} from "../server_config.js";
 import { Strategy as localStrategy } from 'passport-local';
 import bcrypt from 'bcrypt';
 
-const UserQueries = require('./queries/user.query.js');
+const UserQueries = require('../queries/user.query.js');
 
 app.use(session({
     secret: "workout_plans_web_app",
@@ -13,7 +13,7 @@ app.use(session({
 }));
 
 app.use(initialize());
-app.use(_session());
+app.use(passport.session());
 
 passport.use(
     new localStrategy({usernameField:'username'}, (username, password, done)=>{

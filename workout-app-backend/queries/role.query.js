@@ -1,4 +1,4 @@
-import Role from "../models/role.model";
+import Role from "../models/role.model.js";
 
 const getRoleByName = async(name) => {
     try{
@@ -15,3 +15,5 @@ const getAllRoles = async() => {
         throw err;
     }
 }
+
+export const RoleQuery = {getAllRoles, getRoleByName};

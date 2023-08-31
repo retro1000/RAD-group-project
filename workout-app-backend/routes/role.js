@@ -1,5 +1,8 @@
-const router = require('express').Router();
-const RoleQueries = require('../queries/role.query.js');
+import express from 'express';
+import {RoleQueries} from '../queries/role.query.js';
+
+const router = express.Router();
+
 
 router.route('', '/').get(async(req, res) => {
     try{

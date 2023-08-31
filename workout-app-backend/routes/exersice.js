@@ -1,5 +1,7 @@
-const router = require('express').Router();
-const ExersiceQueries = require('../queries/exersice.query.js');
+import express from 'express';
+import {ExersiceQueries} from '../queries/exersice.query.js';
+
+const router = express.Router();
 
 router.route('', '/').post(async(req, res) => {
     try{

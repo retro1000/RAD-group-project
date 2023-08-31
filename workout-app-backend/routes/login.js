@@ -1,10 +1,12 @@
-const router = require('express').Router();
-const UserQueries = require('../queries/user.query.js');
+import express from 'express';
+import {UserQueries} from '../queries/user.query.js';
+
+const router = express.Router();
 
 router.route('', '/').post(async(req, res) => {
     try{
         const {firstname, lastname, username, age, gender, heigth, weigth, password} = req.body;
-        UserQueries.createNewUser(`${firstname} ${lastname}`, username, password, age, gender, heigth, weigth);
+        await UserQueries.createNewUser(`${firstname} ${lastname}`, username, password, age, gender, heigth, weigth);
         res.status(201).json({ message: 'User registered successfully.' });
     }catch(err){
         console.log('Error:', err);
@@ -12,4 +14,4 @@ router.route('', '/').post(async(req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

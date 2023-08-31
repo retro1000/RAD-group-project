@@ -5,3 +5,5 @@ const generateUniqueExerciseId = (existingIds, candidateId) => {
         throw err;
     }
 };
+
+export const CommonQueries = {generateUniqueExerciseId};

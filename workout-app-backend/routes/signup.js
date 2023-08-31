@@ -1,5 +1,7 @@
-const router = require('express').Router();
-const UserQueries = require('../queries/user.query.js');
+import express from 'express';
+import { UserQueries } from '../queries/user.query.js';
+
+const router = express.Router();
 
 router.route('', '/').get((req, res) => {
     
@@ -16,4 +18,4 @@ router.route('', '/').post(async(req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

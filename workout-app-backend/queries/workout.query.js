@@ -1,12 +1,12 @@
-import Workout from "../models/workout.model";
+import Workout from "../models/workout.model.js";
 import { Mongoose, startSession } from "mongoose";
+import dotenv from 'dotenv';
+import {BodyPartQueries} from '../queries/bodyPart.query.js';
+import {UserQueries} from '../queries/user.query.js';
+import {CommonQueries} from '../queries/common.query.js';
 
-const BodyPartQueries = require('../queries/bodyPart.query');
-const UserQueries = require('../queries/user.query');
-const CommonQueries = require('../queries/common.query');
 
-
-require('dotenv').config();
+dotenv.config();
 
 const getWorkoutByRules = async(bodyPartIds, age, gender, start, limit) => {
     try{
@@ -76,3 +76,5 @@ const calculateTime = async(workoutId) => {
         throw err;
     }
 }
+
+export const WorkoutQuery = {calculateTime, createNewWorkout, createNewWorkoutForUser, getWorkoutById, getWorkoutByRules};

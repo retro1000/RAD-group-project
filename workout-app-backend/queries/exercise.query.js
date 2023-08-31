@@ -1,8 +1,8 @@
-import Exersice from "../models/exersice.model";
+import {Exersice} from "../models/exersice.model.js";
 import mongoose, { mongo, startSession } from "mongoose";
 
-const BodyPartQueries = require('./bodyPart.query');
-const CommonQueries = require('../queries/common.query');
+const BodyPartQueries = require('./bodyPart.query.js');
+const CommonQueries = require('../queries/common.query.js');
 
 const getExersiceByRules = async(bodyPartIds, age, gender, start, limit) => {
     try{

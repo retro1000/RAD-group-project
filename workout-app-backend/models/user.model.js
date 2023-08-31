@@ -1,5 +1,5 @@
 import { Schema as _Schema, model } from 'mongoose';
-import Role from './role.model';
+import {Role} from './role.model.js';
 
 const Schema = _Schema;
 

@@ -1,5 +1,4 @@
 import { Schema as _Schema, model } from 'mongoose';
-import BodyPart from './bodyPart.model';
 
 const Schema = _Schema;
 

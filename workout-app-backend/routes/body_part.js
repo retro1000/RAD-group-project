@@ -1,5 +1,7 @@
-const router = require('express').Router();
-const BodyPartQueries = require('../queries/bodyPart.query.js');
+import express, { Router } from 'express';
+import {BodyPartQueries} from '../queries/bodyPart.query.js';
+
+const router = express.Router();
 
 router.route('', '/').get(async(req, res) => {
     try{
@@ -10,4 +12,4 @@ router.route('', '/').get(async(req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

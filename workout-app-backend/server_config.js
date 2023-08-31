@@ -1,28 +1,48 @@
-import express, { json } from 'express';
+import express from 'express';
 import cors from 'cors';
-import { connect, connection as _connection } from 'mongoose';
+import mongoose from 'mongoose';
+import fs from 'fs';
+import https from 'https';
 import bodyParse from 'body-parser';
+import dotenv from 'dotenv';
+import loginRoutes from './routes/login.js';
+import signupRoutes from './routes/signup.js';
+import bodyPartRoutes from './routes/body_part.js';
 
-require('dotenv').config();
+dotenv.config();
 
-const app = express();
+const connection = mongoose.connection;
+
 const port = process.env.PORT || 5000;
 const reactPort = process.env.REACT_PORT || 3000;
+const corsObject = {
+    origin: `http:localhost:${reactPort}`,
+    methods: 'GET, POST',
+    credentials: true,
+};
 
-app.use(cors());
-app.use(json());
+const app = express();
+
+// const options = {
+//     key: fs.readFileSync('path/to/private/key.pem'),
+//     cert: fs.readFileSync('C:\\Windows\\System32\\workout-plans-web-app.cer'),
+// };
+
+app.use(cors(corsObject));
+app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-connect(uri, {useNewUrlParser:true});
+mongoose.connect(uri, {useNewUrlParser:true});
 
-const connection = _connection;
 connection.once('open', () => {
     console.log('Database connected successfully');
 });
 
-app.use('/login', require('./routes/login'));
-app.use('/signup', require('./routes/signup'));
-app.use('/bodyParts', require('./routes/body_part'));
+app.use('/login', loginRoutes);
+app.use('/signup', signupRoutes);
+app.use('/bodyParts', bodyPartRoutes);
+
+// const server = https.createServer(options, app);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

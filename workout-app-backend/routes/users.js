@@ -1,7 +1,9 @@
 import {reactPort} from '../server_config.js';
 
-const router = require('express').Router();
-const User = require('../models/user.model');
+import express from 'express';
+import {UserQueries} from '../queries/user.query.js';
+
+const router = express.Router();
 
 router.route('', '/').get((req, res) => {
     

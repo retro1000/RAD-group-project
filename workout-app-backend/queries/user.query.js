@@ -1,11 +1,10 @@
 import mongoose, { Error, Mongoose } from "mongoose";
-import User from "../models/exersice.model";
+import User from "../models/exersice.model.js";
 import { startSession } from "mongoose";
 import bcrypt from 'bcrypt';
-
-const RoleQuery = require("../queries/role.query");
-const WorkoutQuery = require("../queries/workout.query");
-const CommonQueries = require('../queries/common.query');
+import {RoleQuery} from "../queries/role.query.js";
+import {WorkoutQuery} from "../queries/workout.query.js";
+import {CommonQueries} from '../queries/common.query.js';
 
 const getUserByUsername = (username) => {
     try{
@@ -107,3 +106,5 @@ const updateExecutionTimeByUserIdAndWorkoutId = async(userId, workoutId, time) =
         throw err;
     }
 }
+
+export const UserQueries = {getUserByUsername, getMyWorkoutsByUserId, getUserDetailsByUsername, updateWorkoutStatusByUserIdAndWorkoutId, selectNewWorkout, createNewUser, updateExecutionTimeByUserIdAndWorkoutId, chooseNewWorkout};

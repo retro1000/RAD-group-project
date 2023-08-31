@@ -1,4 +1,4 @@
-import BodyPart from "../models/bodyPart.model";
+import BodyPart from "../models/bodyPart.model.js";
 
 const getAllBodyParts = async ()=>{
     try{
@@ -47,3 +47,5 @@ const updateWorkoutList = async(bodyPartId, workoutId)=>{
         throw err;
     }
 }
+
+export const BodyPartQueries = {updateExersicesList, updateWorkoutList, getAllBodyParts, getAllExersicesForBodyPart, getAllWorkoutsForBodyPart};
