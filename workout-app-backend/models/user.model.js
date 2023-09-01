@@ -1,7 +1,5 @@
-import { Schema as _Schema, model } from 'mongoose';
-import {Role} from './role.model.js';
-
-const Schema = _Schema;
+import { Schema, model } from 'mongoose';
+import Role from './role.model.js';
 
 const userSchema = new Schema({
     userId:{
@@ -17,12 +15,10 @@ const userSchema = new Schema({
     },
     age:{
         type: Number,
-        required: true,
         trim: true,
     },
     gender:{
         type: String,
-        required: true
     },
     username:{
         type: String,
@@ -44,11 +40,11 @@ const userSchema = new Schema({
     //map=>(workout, time, duration, status, periodCal, etc)
     workouts:{
         type:[Map],
-        of: _Schema.Type.Mixed
+        of: Schema.Types.Mixed
     },
     roles:{
-        type:[Role],
-        required: true
+        type: [Schema.Types.ObjectId],
+        ref: 'Role',
     }
 }, {timestamps:true});
 

@@ -1,14 +1,13 @@
 import mongoose, { Error, Mongoose } from "mongoose";
-import User from "../models/exersice.model.js";
-import { startSession } from "mongoose";
+import User from "../models/user.model.js";
 import bcrypt from 'bcrypt';
-import {RoleQuery} from "../queries/role.query.js";
-import {WorkoutQuery} from "../queries/workout.query.js";
+import {RoleQueries} from "../queries/role.query.js";
+import {WorkoutQueries} from "../queries/workout.query.js";
 import {CommonQueries} from '../queries/common.query.js';
 
-const getUserByUsername = (username) => {
+const getUserByUsername = async(username) => {
     try{
-        return User.findOne({username: username})
+        return await User.findOne({username: username})
             .select('userId', 'username', 'password', 'roles')|| (()=>{throw new Error('No username found');})();
     }catch(err){
         throw err;
@@ -39,13 +38,22 @@ const createNewUser = async(name, username, password, age, gender, heigth, weigt
     const session = await mongoose.startSession();
     try{
         session.startTransaction();
-        const existingIds = await Exersice.find().select('userId');
-        const userId = await CommonQueries.generateUniqueExerciseId(existingIds, existingIds+1);
+        const existingIds = (await User.find().select('userId')).map(Id=>Id.userId);;
+        const userId = await CommonQueries.generateUniqueId(existingIds, existingIds.length+1);
         const hashPassword = await bcrypt.hash(password, 10);
-        const roles = RoleQuery.getRoleByName(role);
-        const userDetails = new User(
-            userId, name, age, gender, username, hashPassword, heigth, weigth, [], [roles]
-        )
+        const roles = await RoleQueries.getRoleByName(role);
+        const userDetails = new User({
+            userId:userId,
+            name:name,
+            age:age,
+            gender:gender,
+            username:username,
+            password:hashPassword,
+            heigth:heigth,
+            weigth:weigth,
+            workouts:[],
+            roles:[roles]
+        })
         await userDetails.save();
         await session.commitTransaction();
     }catch(err){
@@ -84,7 +92,7 @@ const chooseNewWorkout = async(userId, workoutId) => {
     const session = await Mongoose.startSession();
     try{
         session.startTransaction();
-        const time = await WorkoutQuery.calculateTime(workoutId);
+        const time = await WorkoutQueries.calculateTime(workoutId);
         User.findOneAndUpdate(
             {userId:userId},
             {$addToSet:{workouts:{'workoutId':workoutId, 'time':time, 'status':'Ongoing', 'executionTime':0}}},
@@ -107,4 +115,18 @@ const updateExecutionTimeByUserIdAndWorkoutId = async(userId, workoutId, time) =
     }
 }
 
-export const UserQueries = {getUserByUsername, getMyWorkoutsByUserId, getUserDetailsByUsername, updateWorkoutStatusByUserIdAndWorkoutId, selectNewWorkout, createNewUser, updateExecutionTimeByUserIdAndWorkoutId, chooseNewWorkout};
+const followWorkout = async(userId, workoutId, status) => {
+    try{
+        if(status === 'Completed'){
+            await User.findOneAndUpdate(
+                {userId: userId, 'workouts.workoutId': workoutId},
+                {$set: {'workouts.$.status':'Ongoing', 'workouts.$.executionTime':0}}
+            ) || (()=>{throw new Error('No workout found');})();
+        }
+        return await WorkoutQueries.getWorkoutById(workoutId);
+    }catch(err){
+        throw err;
+    }
+}
+
+export const UserQueries = {followWorkout, getUserByUsername, getMyWorkoutsByUserId, getUserDetailsByUsername, updateWorkoutStatusByUserIdAndWorkoutId, selectNewWorkout, createNewUser, updateExecutionTimeByUserIdAndWorkoutId, chooseNewWorkout};

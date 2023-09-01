@@ -1,12 +1,11 @@
-import {Exersice} from "../models/exersice.model.js";
+import Exersice from "../models/exersice.model.js";
 import mongoose, { mongo, startSession } from "mongoose";
+import {BodyPartQueries} from './bodyPart.query.js';
+import {CommonQueries} from '../queries/common.query.js';
 
-const BodyPartQueries = require('./bodyPart.query.js');
-const CommonQueries = require('../queries/common.query.js');
-
-const getExersiceByRules = async(bodyPartIds, age, gender, start, limit) => {
+const getExersiceByRules = async(bodyPartId, age, gender, type, equipment, difficulty, start, limit) => {
     try{
-        return await Exersice.find($and[{age:age}, {gender:gender}, {bodyPartIds:{$in: bodyPartIds}}])
+        return await Exersice.find({type:type, equipment:equipment, difficulty:difficulty,age:age, gender:gender, bodyPartIds:{$in: bodyPartId}})
             .select('exersiceId name img')
             .skip(start)
             .limit(limit)
@@ -19,7 +18,7 @@ const getExersiceByRules = async(bodyPartIds, age, gender, start, limit) => {
 const getExersiceById = async(exersiceId) => {
     try{
         return await Exersice.findOne({exersiceId: exersiceId})
-            .select('exersiceId name age gender steps mainImage images')
+            .select('exersiceId name type equipment difficulty age gender steps mainImage images')
             || (()=>{throw new Error('No exersiceId found');})();
     }catch(err){
         throw err;
@@ -36,16 +35,26 @@ const getExersiceByIds = async(idList) => {
     }
 }
 
-const createNewExersice = async({name, age, gender, mainImage, images, steps, bodyPartIds}) => {
+const createNewExersice = async({name, type, equipment, difficulty, age, gender, mainImage, images, steps, bodyPartIds}) => {
     const session = mongoose.startSession();
     try{
         session.startTransaction();
-        const existingIds = await Exersice.find().select('userId');
-        const exersiceId = await CommonQueries.generateUniqueExerciseId(existingIds, existingIds+1);
+        const existingIds = (await Exersice.find().select('exersiceId')).map(Id=>Id.exersiceId);
+        const exersiceId = await CommonQueries.generateUniqueId(existingIds, existingIds.length+1);
         await BodyPartQueries.updateExersicesList(bodyPartIds, exersiceId);
-        const exersiceDetails = new Exersice(
-            exersiceId, name, age, gender, steps, mainImage, images, bodyPartIds
-        );
+        const exersiceDetails = new Exersice({
+            exersiceId:exersiceId, 
+            name:name,
+            type:type,
+            equipment:equipment,
+            difficulty:difficulty,
+            age:age, 
+            gender:gender,
+            steps:steps,
+            mainImage:mainImage,
+            images:images,
+            bodyPartIds:bodyPartIds
+        });
         await exersiceDetails.save();
         await session.commitTransaction();
     }catch(err){
@@ -55,3 +64,5 @@ const createNewExersice = async({name, age, gender, mainImage, images, steps, bo
         await session.endSession();
     }
 }
+
+export const ExersiceQueries = {createNewExersice, getExersiceById, getExersiceByIds, getExersiceByRules};

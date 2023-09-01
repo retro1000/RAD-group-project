@@ -25,6 +25,10 @@ const workoutSchema = new Schema({
         type: Number,
         required: true
     },
+    bodyPartId:{
+        type:Number,
+        required: true
+    },
     // map=>(exerciseId, time, rounds, etc)
     exercises:{
         type: [Map],

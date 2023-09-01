@@ -12,7 +12,7 @@ const roleSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 5
+        minlength: 4
     }
 }, {timestamps:true});
 

@@ -14,6 +14,17 @@ const exersiceSchema = new Schema({
         trim: true,
         minlength: 5
     },
+    type:{
+        type: String,
+        required: true
+    },
+    equipment:{
+        type: String
+    },
+    difficulty:{
+        type: String,
+        required:true
+    },
     age:{
         type: [Number],
         required: true,

@@ -16,4 +16,4 @@ const getAllRoles = async() => {
     }
 }
 
-export const RoleQuery = {getAllRoles, getRoleByName};
+export const RoleQueries = {getAllRoles, getRoleByName};

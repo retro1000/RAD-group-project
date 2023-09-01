@@ -1,13 +1,19 @@
+//1234 - Damitha ps
+
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import fs from 'fs';
-import https from 'https';
-import bodyParse from 'body-parser';
+// import fs from 'fs';
+// import https from 'https';
+// import bodyParse from 'body-parser';
 import dotenv from 'dotenv';
 import loginRoutes from './routes/login.js';
 import signupRoutes from './routes/signup.js';
 import bodyPartRoutes from './routes/body_part.js';
+import exersiceRoutes from './routes/exersice.js';
+import roleRoutes from './routes/role.js';
+import workoutRoutes from './routes/workout.js';
+import { UserQueries } from './queries/user.query.js';
 
 dotenv.config();
 
@@ -41,6 +47,9 @@ connection.once('open', () => {
 app.use('/login', loginRoutes);
 app.use('/signup', signupRoutes);
 app.use('/bodyParts', bodyPartRoutes);
+app.use('/exersice', exersiceRoutes);
+app.use('/role', roleRoutes);
+app.use('/workout', workoutRoutes);
 
 // const server = https.createServer(options, app);
 
