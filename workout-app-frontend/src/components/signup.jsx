@@ -39,7 +39,7 @@ function SignUp(props){
                 username:username.current.value,
                 password:password.current.value
             }
-            axios.post('http://localhost:4080/signup', signupData)
+            axios.post('http://localhost:6600/signup', signupData)
                 .then((Response)=>{
                     props.handleLoading();
                 })

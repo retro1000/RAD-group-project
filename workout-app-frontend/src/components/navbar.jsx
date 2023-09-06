@@ -31,7 +31,7 @@ function NavBar(props){
                         <ul>
                             <li id="home" className={(props.currentPage === 'home')?'current_page':"nav_topic"} value='home' onClick={handleNavItemClick}>Home</li>
                             <li id="dashboard" className={(props.currentPage === 'dashboard')?'current_page':"nav_topic"} value='dashboard' onClick={handleNavItemClick}>Dashboard</li>
-                            <li id="start_workout" className={(props.currentPage === 'start_workout')?'current_page':"nav_topic"} value='start_workout' onClick={handleNavItemClick}>Start Workout</li>
+                            <li id="workouts" className={(props.currentPage === 'workouts')?'current_page':"nav_topic"} value='workouts' onClick={handleNavItemClick}>Workouts</li>
                             <li id="my_workouts" className={(props.currentPage === 'my_workouts')?'current_page':"nav_topic"} value='my_workouts'onClick={handleNavItemClick}>My Workouts</li>
                             <li id="about_us" className={(props.currentPage === 'about_us')?'current_page':"nav_topic"} value='about_us'onClick={handleNavItemClick} >About Us</li>
                         </ul>

@@ -1,14 +1,16 @@
 import express from 'express';
 import {BodyPartQueries} from '../queries/bodyPart.query.js';
+import { Middleware } from '../config/middleware.config.js';
 
 const router = express.Router();
 
-router.route('', '/').get(async(req, res) => {
+router.route('/').get(async(req, res) => {
     try{
-        res.json(await BodyPartQueries.getAllBodyParts());
+        console.log('hit');
+        return res.status(200).json(await BodyPartQueries.getAllBodyParts());
     }catch(err){
         console.log('Error:', err);
-        res.status(500).json({error: 'An error occured.'});
+        return res.status(500).json({error: 'An error occured.'});
     }
 });
 

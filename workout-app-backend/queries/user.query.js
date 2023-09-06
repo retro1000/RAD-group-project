@@ -8,7 +8,7 @@ import {CommonQueries} from '../queries/common.query.js';
 const getUserByUsername = async(username) => {
     try{
         return await User.findOne({username: username})
-            .select('userId', 'username', 'password', 'roles')|| (()=>{throw new Error('No username found');})();
+            .select('userId username password roles') || (()=>{throw new Error('No username found');})();
     }catch(err){
         throw err;
     }
@@ -41,7 +41,10 @@ const createNewUser = async(name, username, password, age, gender, heigth, weigt
         const existingIds = (await User.find().select('userId')).map(Id=>Id.userId);;
         const userId = await CommonQueries.generateUniqueId(existingIds, existingIds.length+1);
         const hashPassword = await bcrypt.hash(password, 10);
-        const roles = await RoleQueries.getRoleByName(role);
+        const roles = new Map();
+        const roleData = await RoleQueries.getRoleByName(role);
+        roles.set('roleId', roleData['roleId']);
+        roles.set('name', roleData['name']);
         const userDetails = new User({
             userId:userId,
             name:name,
@@ -52,7 +55,7 @@ const createNewUser = async(name, username, password, age, gender, heigth, weigt
             heigth:heigth,
             weigth:weigth,
             workouts:[],
-            roles:[roles]
+            roles: [roles]
         })
         await userDetails.save();
         await session.commitTransaction();

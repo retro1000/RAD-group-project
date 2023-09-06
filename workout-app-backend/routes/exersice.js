@@ -1,35 +1,36 @@
 import express from 'express';
 import {ExersiceQueries} from '../queries/exercise.query.js';
 import upload from '../config/multer.config.js';
+import { Middleware } from '../config/middleware.config.js';
 
 const router = express.Router();
 
-router.route('', '/').post(async(req, res) => {
+router.route('/').post(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin', 'users']), async(req, res) => {
     try{
         const data = req.body;
-        res.json(await ExersiceQueries.getExersiceByRules(data.bodyPartId, data.type, data.equipment, data.difficulty, data.age, data.gender, data.start, data.limit));
+        return res.status(200).json(await ExersiceQueries.getExersiceByRules(data.bodyPartId, data.type, data.equipment, data.difficulty, data.age, data.gender, data.start, data.limit));
     }catch(err){
         console.log('Error:', err);
-        res.status(500).json({error: 'An error occured.'});
+        return res.status(500).json({error: 'An error occured.'});
     }
 });
 
-router.route('', '/view').post(async(req, res) => {
+router.route('/view').post(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin', 'users']), async(req, res) => {
     try{
-        res.json(await ExersiceQueries.getExersiceById(req.body.exersiceId));
+        return res.status(200).json(await ExersiceQueries.getExersiceById(req.body.exersiceId));
     }catch(err){
         console.log('Error:', err);
-        res.status(500).json({error: 'An error occured.'});
+        return res.status(500).json({error: 'An error occured.'});
     }
 })
 
-router.route('', '/create').post(upload.single('mainImage'), upload.array('images', 5), async(req, res) => {
+router.route('/create').post(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin']), upload.single('mainImage'), upload.array('images', 5), async(req, res) => {
     try{
         const data = req.body;
-        await ExersiceQueries.createNewExersice(data.name, data.type, data.equipment, data.difficulty, data.age, data.gender, data.mainImage, data.images, data.steps, data.bodyPartIds);
+        if(!await ExersiceQueries.createNewExersice(data.name, data.type, data.equipment, data.difficulty, data.age, data.gender, data.mainImage, data.images, data.steps, data.bodyPartIds)) return res.status(200).json({message: "Exercise succefully added"});
     }catch(err){
         console.log('Error:', err);
-        res.status(500).json({error: 'An error occured.'});
+        return res.status(500).json({error: 'An error occured.'});
     }
 });
 

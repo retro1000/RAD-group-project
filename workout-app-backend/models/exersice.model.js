@@ -27,12 +27,10 @@ const exersiceSchema = new Schema({
     },
     age:{
         type: [Number],
-        required: true,
         trim: true,
     },
     gender:{
         type: [String],
-        required: true
     },
     steps:{
         type:[String],
@@ -40,11 +38,9 @@ const exersiceSchema = new Schema({
     },
     mainImage:{
         type: String,
-        required: true
     },
     images:{
         type:[String],
-        required:true
     },
     bodyPartIds:{
         type: [Number],

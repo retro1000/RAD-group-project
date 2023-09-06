@@ -15,16 +15,19 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path='/'element={<LoginPage />} />
+        <Route path='/login'element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/workout" element={<WorkoutPage />} />
         <Route path="/create_workout" element={<CreateWorkoutPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/start_workout" element={<StartWorkoutPage />} />
+        <Route path="/workouts" element={<WorkoutPage />} />
         <Route path="/exersice" element={<ViewExersicePage />} />
         <Route path="/my_workouts" element={<MyWorkoutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        {/* <Route default element={<LoginPage />} /> */}
       </Routes>
     </Router>
   );

@@ -35,13 +35,12 @@ const getExersiceByIds = async(idList) => {
     }
 }
 
-const createNewExersice = async({name, type, equipment, difficulty, age, gender, mainImage, images, steps, bodyPartIds}) => {
-    const session = mongoose.startSession();
+const createNewExersice = async(name, type, equipment, difficulty, age, gender, mainImage, images, steps, bodyPartIds) => {
+    const session = await mongoose.startSession();
     try{
         session.startTransaction();
         const existingIds = (await Exersice.find().select('exersiceId')).map(Id=>Id.exersiceId);
         const exersiceId = await CommonQueries.generateUniqueId(existingIds, existingIds.length+1);
-        await BodyPartQueries.updateExersicesList(bodyPartIds, exersiceId);
         const exersiceDetails = new Exersice({
             exersiceId:exersiceId, 
             name:name,
@@ -55,7 +54,8 @@ const createNewExersice = async({name, type, equipment, difficulty, age, gender,
             images:images,
             bodyPartIds:bodyPartIds
         });
-        await exersiceDetails.save();
+        await exersiceDetails.save() || (()=>{throw new Error('cannot save')});
+        await BodyPartQueries.updateExersicesList(bodyPartIds, exersiceId);
         await session.commitTransaction();
     }catch(err){
         await session.abortTransaction();

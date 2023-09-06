@@ -70,8 +70,8 @@ const createNewWorkout = async(bodyPartId, workoutData) => {
             bodyPartId:bodyPartId,
             exercises:workoutData.exersiceList
         });
-        await BodyPartQueries.updateWorkoutList(bodyPartId, workoutId);
         workoutDetails.save();
+        await BodyPartQueries.updateWorkoutList(bodyPartId, workoutId);
         await session.commitTransaction();
     }catch(err){
         await session.abortTransaction();

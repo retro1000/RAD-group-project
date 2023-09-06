@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose';
-import Role from './role.model.js';
 
 const userSchema = new Schema({
     userId:{
@@ -43,8 +42,8 @@ const userSchema = new Schema({
         of: Schema.Types.Mixed
     },
     roles:{
-        type: [Schema.Types.ObjectId],
-        ref: 'Role',
+        type:[Map],
+        of: Schema.Types.Mixed
     }
 }, {timestamps:true});
 

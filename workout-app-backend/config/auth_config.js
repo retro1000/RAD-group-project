@@ -1,35 +1,35 @@
-import passport, { initialize } from "passport";
-import expressSession from "express-session";
-import {app} from "../server_config.js";
-import { Strategy as localStrategy } from 'passport-local';
-import bcrypt from 'bcrypt';
+// import passport from "../server_config.js";
+// import localStrategy from '../server_config.js';
+// import bcrypt from 'bcrypt';
+// import {UserQueries} from '../queries/user.query.js';
 
-const UserQueries = require('../queries/user.query.js');
+// passport.use(
+//     new localStrategy({usernameField:'username', passwordField:'password'}, async(username, password, done)=>{
+//         try{
+//             const {user, err} = await UserQueries.getUserByUsername(username);
+//             if(err) return done(err);
+//             if(!user) return done(null, false, {message:'Invalid creadentials'});
+//             if(!await bcrypt.compare(password, user.password)) return done(null, false, {message:'Invalid creadentials'});
+//             else return done(null, user);
+//         }catch(err){
+//             return done(err);
+//         }
+//     })
+// );
 
-app.use(session({
-    secret: "workout_plans_web_app",
-    resave: false,
-    saveUninitialized: false
-}));
+// passport.serializeUser((user, done) => {
+//     try{
+//         done(null, user.username);
+//     }catch(err){
+//         done(err);
+//     }
+// });
 
-app.use(initialize());
-app.use(passport.session());
-
-passport.use(
-    new localStrategy({usernameField:'username'}, (username, password, done)=>{
-        const {user, err} = UserQueries.getUserByUsername(username);
-        if(err) return done(err);
-        if(!user) return done(null, false, {message:'Invalid creadentials'});
-        if(!bcrypt.compare(password, user.password)) return done(null, false, {message:'Invalid creadentials'});
-        else return done(null, user);
-    })
-);
-
-passport.serializeUser((user, done) => {
-    done(null, user.username);
-});
-
-passport.deserializeUser((username, done) => {
-    const {user, err} = UserQueries.getUserByUsername(username);
-    done(err, user);
-});
+// passport.deserializeUser(async(username, done) => {
+//     try{
+//         const {user, err} = await UserQueries.getUserByUsername(username);
+//         done(err, user);
+//     }catch(err){
+//         done(err);
+//     }
+// });

@@ -2,7 +2,7 @@ import Role from "../models/role.model.js";
 
 const getRoleByName = async(name) => {
     try{
-        return await Role.findOne({name: name}) || (()=>{throw new Error('No name found');})();
+        return await Role.findOne({name: name}).select('roleId name') || (()=>{throw new Error('No name found');})();
     }catch(err){
         throw err;
     }
@@ -16,4 +16,12 @@ const getAllRoles = async() => {
     }
 }
 
-export const RoleQueries = {getAllRoles, getRoleByName};
+const getRoleByObjectId = async(objectId) => {
+    try{
+        return await Role.findOne({_id:objectId}) || (()=>{throw err;})();
+    }catch(err){
+        throw err;
+    }
+}
+
+export const RoleQueries = {getRoleByObjectId, getAllRoles, getRoleByName};

@@ -26,7 +26,7 @@ const getAllWorkoutsForBodyPart = async(bodyPartId)=>{
 
 const updateExersicesList = async(bodyPartIdList, exersiceId)=>{
     try{
-        await BodyPart.findByIdAndUpdate(
+        await BodyPart.updateMany(
             {bodyPartId:{$in:bodyPartIdList}},
             {$push:{exersices:exersiceId}},
             {new: false}

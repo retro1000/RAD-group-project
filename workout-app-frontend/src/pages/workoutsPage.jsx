@@ -11,7 +11,7 @@ function WorkoutPage(){
     const [scrollRef, setScrollRef] = useState(null);
     const [scrollInAboutUs, setScrollInAboutUs] = useState(false);
     const [scrollUp, setScrollUp] = useState(false);
-    const realPage = useRef('home');
+    const realPage = useRef('workouts');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -57,10 +57,11 @@ function WorkoutPage(){
 
     return(
         <div>
-            <div style={{pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
-                <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'home':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
+            <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
+                <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'workouts':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
                 <Display footerOn={false} handleLoading={handleLoading}>
-                    <BodyParts handleLoading={handleLoading}/>
+                    <BodyParts url={'http://localhost:6600/workouts'} handleLoading={handleLoading}/>
+                    {/* <BodyParts url={()?'http://localhost:6600/workouts':''} handleLoading={handleLoading}/> */}
                 </Display>
                 <AboutUs getLocation={getLocation}/>
             </div>

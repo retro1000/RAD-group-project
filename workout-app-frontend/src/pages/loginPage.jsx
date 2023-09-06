@@ -6,9 +6,9 @@ import Loading from "../components/loading";
 function LoginPage(){
 
     const [loading, setLoading] = useState(false);
-
-    const handleLoading = () => {
-        setLoading(!loading);
+    
+    const handleLoading = (val) => {
+        setLoading(val);
     }
 
     return(

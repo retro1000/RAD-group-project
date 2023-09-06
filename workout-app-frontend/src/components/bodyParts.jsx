@@ -1,33 +1,42 @@
-import React, { useEffect, useState } from 'react'; // Corrected import statement, added useState
+import React, { useEffect, useState } from 'react';
 import '../component_style/body_parts_style.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Img from '../images/fitness-women-training.jpg';
 
 function BodyParts(props) {
-    const [bodyPartsList, setBodyPartsList] = useState([]); // Using state to store body parts list
+    const [bodyPartsList, setBodyPartsList] = useState([]);
+    const navigate = useNavigate();
+
+    const handleBodyPartAction = async(event) => {
+        const navItem=event.target.closest('div').value;
+        console.log(navItem);
+    }
 
     useEffect(() => {
-        getParts(); // Call getParts function when component mounts
+            props.handleLoading(true);
+            axios.get('http://localhost:6600/bodyParts', {maxRedirects:0})
+                .then(response => {
+                    props.handleLoading(false);
+                    console.log(response);
+                    if(response.status === 403) navigate('/login');
+                    if(response.status === 200) setBodyPartsList(response.data);
+                    if(response.status === 500) throw new Error('Internal server error');
+                })
+                .catch(error => {
+                    props.handleLoading(false);
+                    if(error.response && error.response.status === 403) navigate('/login');
+                    if(error.response && error.response.status === 500) console.log('Internal server error');
+                    console.error('Error fetching body parts:', Error);
+                });
     }, []);
 
-    const getParts = () => {
-        props.handleLoading(true); // Set loading to true before making the API call
-        axios.get('http://localhost:4080/bodyPart')
-            .then(response => {
-                props.handleLoading(false); // Set loading to false after API call
-                setBodyPartsList(response.data); // Update body parts list using state
-            })
-            .catch(error => {
-                props.handleLoading(false); // Set loading to false on error as well
-                console.error('Error fetching body parts:', error);
-            });
-    };
-
     return (
-        <div className='main_frame'>
+        <div className='main_frame_body_part'>
             {
                 bodyPartsList.map(part => (
-                    <div className='item_item' key={part.id}>
-                        <img src={part.img} alt='' />
+                    <div className='item_item' value={part.id} onClick={handleBodyPartAction}>
+                        <img src={Img} alt='' />
                         <span>{part.name}</span>
                     </div>
                 ))
