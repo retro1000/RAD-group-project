@@ -10,6 +10,8 @@ import ProfilePage from "./pages/profilePage";
 import StartWorkoutPage from "./pages/startWorkoutPage";
 import ViewExersicePage from "./pages/viewExercisePage";
 import WorkoutPage from "./pages/workoutsPage";
+import ViewPage from "./pages/viewPage";
+import ExercisePage from "./pages/exercisePage";
 
 function App() {
   return (
@@ -23,10 +25,13 @@ function App() {
         <Route path="/create_workout" element={<CreateWorkoutPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/start_workout" element={<StartWorkoutPage />} />
-        <Route path="/workouts" element={<WorkoutPage />} />
+        <Route path="/workout" element={<WorkoutPage />} />
+        <Route path="/workout/workouts/view" element={<ViewPage />} />
+        <Route path="/workout/exercises/view" element={<ViewPage />} />
         <Route path="/exersice" element={<ViewExersicePage />} />
         <Route path="/my_workouts" element={<MyWorkoutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/exercise" element={<ExercisePage />} />
         {/* <Route default element={<LoginPage />} /> */}
       </Routes>
     </Router>

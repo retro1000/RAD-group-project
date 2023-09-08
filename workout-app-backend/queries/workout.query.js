@@ -19,6 +19,23 @@ const getWorkoutByRules = async(bodyPartId, age, gender, start, limit) => {
     }
 }
 
+const getWorkoutSortKeys = async(bodyPartId) => {
+    try{
+        var list = {difficulty:[], age:[], gender:[]};
+        const values = await Workout.find({bodyPartIds:{$in: bodyPartId}}).select('difficulty age gender') || (()=>{throw new Error('No exercise found');})();
+        for(const itm in values){
+            const{difficulty, age, gender} = values[itm];
+            list.difficulty.push(difficulty);
+            list.age.push(age);
+            list.gender.push(gender);
+        }
+        for(const key in list) list[key]=[...(new Set(list[key]))];
+        return [{name:'Difficulty', val:list.difficulty}, {name:'Age', val:list.age}, {name:'Gender', val:list.gender}];
+    }catch(err){
+        throw err;
+    }
+}
+
 const getWorkoutById = async(workoutId) => {
     try{
         return await Workout.findOne({workoutId: workoutId}) || (()=>{throw new Error('No workoutId found');})();
@@ -90,4 +107,4 @@ const calculateTime = async(workoutId) => {
     }
 }
 
-export const WorkoutQueries = {calculateTime, createNewWorkout, createNewWorkoutForUser, getWorkoutById, getWorkoutByRules};
+export const WorkoutQueries = {getWorkoutSortKeys, calculateTime, createNewWorkout, createNewWorkoutForUser, getWorkoutById, getWorkoutByRules};

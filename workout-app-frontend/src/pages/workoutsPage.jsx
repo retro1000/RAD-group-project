@@ -11,7 +11,7 @@ function WorkoutPage(){
     const [scrollRef, setScrollRef] = useState(null);
     const [scrollInAboutUs, setScrollInAboutUs] = useState(false);
     const [scrollUp, setScrollUp] = useState(false);
-    const realPage = useRef('workouts');
+    const realPage = useRef('workout');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -58,10 +58,10 @@ function WorkoutPage(){
     return(
         <div>
             <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
-                <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'workouts':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
+                <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'workout':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
                 <Display footerOn={false} handleLoading={handleLoading}>
-                    <BodyParts url={'http://localhost:6600/workouts'} handleLoading={handleLoading}/>
-                    {/* <BodyParts url={()?'http://localhost:6600/workouts':''} handleLoading={handleLoading}/> */}
+                    <BodyParts type={'workouts'} para={'Choose a tailormade workout that fits your goal'} des={'Choose a workout for you'} handleLoading={handleLoading}/>
+                    <BodyParts type={'exercises'} para={'Create a your own custom workout that fits your goal'} des={'Create a custome workout for you'} handleLoading={handleLoading}/>
                 </Display>
                 <AboutUs getLocation={getLocation}/>
             </div>

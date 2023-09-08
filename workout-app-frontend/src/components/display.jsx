@@ -28,7 +28,7 @@ function Display(props){
     }, []);
 
     return(
-        <div id="display_frame" style={{marginTop:'60px', marginBottom:'0', width:'100%', height:'auto', padding:'40px 0', background:'rgba(2, 89, 89, 0.375)'}}>
+        <div id="display_frame" style={{marginTop:(!props.footerOn)?'60px':'0'}}>
             <div id="footer" style={{display:(props.footerOn)?'flex':'none', backgroundImage:`url(${BackgroundImage})`, backgroundRepeat:'no-repeat', backgroundSize:'cover', backgroundPositionY:'-100px'}}>
                 {
                     (quotes.length >= 1)?<div id="quote">

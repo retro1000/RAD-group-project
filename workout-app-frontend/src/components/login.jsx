@@ -39,7 +39,7 @@ function Login(props) {
                 username:username.current.value,
                 password:password.current.value,
                 remember_me:rememberme
-            }, {maxRedirects: 0})
+            }, {maxRedirects: 0, withCredentials:true})
                 .then(response => {
                     props.handleLoading(false);
                     console.log(response);

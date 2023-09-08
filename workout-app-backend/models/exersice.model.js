@@ -25,13 +25,6 @@ const exersiceSchema = new Schema({
         type: String,
         required:true
     },
-    age:{
-        type: [Number],
-        trim: true,
-    },
-    gender:{
-        type: [String],
-    },
     steps:{
         type:[String],
         required: true

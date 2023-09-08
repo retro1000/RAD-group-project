@@ -56,9 +56,9 @@ function DashboardPage(){
 
     return(
         <div>
-            <div style={{pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
+            <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
                 <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'dashboard':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
-                <Display footerOn={true} handleLoading={handleLoading}>
+                <Display footerOn={false} handleLoading={handleLoading}>
                     
                 </Display>
                 <AboutUs getLocation={getLocation}/>

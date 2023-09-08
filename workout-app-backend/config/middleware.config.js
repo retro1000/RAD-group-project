@@ -18,7 +18,6 @@ function requireRoleCheck(roles){
 }
 
 function ensureAuthenticated(req, res, next) {
-    console.log(req.isAuthenticated() ,req.session);
     if(req.isAuthenticated()) return next();
     return res.status(403).json({message: 'Forbidden'});
 }

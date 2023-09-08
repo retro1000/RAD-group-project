@@ -15,6 +15,14 @@ router.route('/').post(Middleware.ensureAuthenticated, Middleware.requireRoleChe
     }
 });
 
+router.route('/sort_key').post(Middleware.ensureAuthenticated, async(req, res) => {
+    try{
+        return res.status(200).json(await WorkoutQueries.getExersiceSortKeys(req.body.bodyPartId));
+    }catch(err){
+        return res.status(500).json({massage: 'Internal server error'});
+    }
+});
+
 router.route('/view').post(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin', 'users']), async(req, res) => {
     try{
         return res.status(200).json(await WorkoutQueries.getWorkoutById(req.body.workoutId));

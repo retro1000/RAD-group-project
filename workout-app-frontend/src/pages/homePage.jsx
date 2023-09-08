@@ -56,7 +56,7 @@ function HomePage(){
 
     return(
         <div>
-            <div style={{pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
+            <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
                 <Navbar realPage={realPage} currentPage={(!scrollInAboutUs)?'home':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
                 <Display footerOn={true} handleLoading={handleLoading}>
                     

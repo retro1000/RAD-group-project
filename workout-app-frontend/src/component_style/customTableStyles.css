@@ -1,0 +1,14 @@
+/* customTableStyles.css */
+.custom-table {
+    width: 80%; /* Adjust the table width as needed */
+    margin: 0 auto; /* Center the table horizontally */
+  }
+  
+  .custom-table th {
+    font-size: 16px; /* Adjust the font size of table headers */
+  }
+  
+  .custom-table td {
+    font-size: 14px; /* Adjust the font size of table cells */
+    padding: 8px 12px; /* Adjust cell padding as needed */
+  }

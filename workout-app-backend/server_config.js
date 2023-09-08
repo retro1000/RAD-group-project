@@ -16,10 +16,11 @@ import bodyPartRoutes from './routes/body_part.js';
 import exersiceRoutes from './routes/exersice.js';
 import roleRoutes from './routes/role.js';
 import workoutRoutes from './routes/workout.js';
-// import { ExersiceQueries } from './queries/exercise.query.js';
+import { ExersiceQueries } from './queries/exercise.query.js';
 import bcrypt from 'bcrypt';
 import {UserQueries} from './queries/user.query.js';
 import flash from 'express-flash';
+import {API} from './config/ninja_api.config.js';
 
 dotenv.config();
 
@@ -52,7 +53,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-    new LocalStrategy({usernameField:'username', passwordField:'password'}, async(username, password, done)=>{
+    new LocalStrategy(async(username, password, done)=>{
         try{
             const user = await UserQueries.getUserByUsername(username);
             if(!user) return done(null, false);
@@ -75,8 +76,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async(username, done) => {
     try{
         const user = await UserQueries.getUserByUsername(username);
-        // console.log(user);
-        return done(user);
+        return done(null, user);
     }catch(err){
         return done(err);
     }
@@ -89,27 +89,25 @@ connection.once('open', () => {
     console.log('Database connected successfully');
 });
 
-app.post('/login', passport.authenticate('local', {
-    successRedirect: `${reactApp}/home`,
-    failureRedirect: `${reactApp}/login`,
-    failureFlash: true,
-}));
-
-// app.post('/login', (req, res, next)=>{
-//     passport.authenticate('local', (err, user)=>{
-//         try{
-//             if(req.body.remember_me) req.session.cookie.maxAge = 7*24*60*60*1000;
-//             return res.status(200).json({ 
-//                     message: 'Authentication successful', 
-//                     username: user.username, 
-//                     roles:user.roles 
-//                 });
-//         }catch(err){
-//             return res.status(403).json({ message: 'Authentication fail'});
-//         }
-// })
-// (req, res, next);
-// });
+app.post('/login', (req, res, next)=>{
+    passport.authenticate('local', (err, user, info)=>{
+        try{
+            if(err || !user) return res.status(403).json({ message: 'Authentication fail'});
+            req.login(user, (loginErr) => {
+                if(loginErr) return res.status(500).json({ message: 'Internal server error'});
+                if(req.body.remember_me) req.session.cookie.maxAge = 7*24*60*60*1000;
+                return res.status(200).json({ 
+                    message: 'Authentication successful', 
+                    username: user.username, 
+                    roles:user.roles 
+                });
+            });
+        }catch(err){
+            return res.status(403).json({ message: 'Authentication fail'});
+        }
+    })
+(req, res, next);
+});
 
 app.get('/logout', (req, res) => {
     req.logout();
@@ -119,12 +117,19 @@ app.get('/logout', (req, res) => {
 // app.use('/login', loginRoutes);
 app.use('/signup', signupRoutes);
 app.use('/bodyParts', bodyPartRoutes);
-app.use('/exersice', exersiceRoutes);
+app.use('/exercises', exersiceRoutes);
 app.use('/role', roleRoutes);
-app.use('/workout', workoutRoutes);
+app.use('/workouts', workoutRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
 // export default {passport, localStrategy, express};
+
+// async function j(){
+//     const k = await ExersiceQueries.getExersiceSortKeys(1);
+//     console.log(k);
+// }
+
+// j();
