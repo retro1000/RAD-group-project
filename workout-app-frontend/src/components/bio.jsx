@@ -11,7 +11,7 @@ function Bio(props) {
     useEffect(() => {
         async function getData(){
             props.handleLoading(true);
-            axios.get('http://localhost:6600/users/view')
+            axios.post('http://localhost:6600/users/view',{}, {maxRedirects:0, withCredentials: true})
                 .then(Response=>{
                     if(Response.status === 200) setUserData(Response.data.details);
                     if(Response.status === 403) navigate('/login');
@@ -24,7 +24,7 @@ function Bio(props) {
                 )
         }
 
-        getData();
+        if(userData === null) getData();
     });
 
     return (
@@ -34,26 +34,35 @@ function Bio(props) {
                 {
                     (userData !== null)?
                         <>
-                        <div className="detail">
+                        <div className="detail cl_1" style={{borderTopLeftRadius:'10px', borderTopRightRadius:'10px'}}>
                             <label>Full Name: </label>
                             <span>{userData.name}</span>
                         </div>
-                        <div className="detail">
+                        <div className="detail cl_2">
+                            <label>Username: </label>
+                            <span>{userData.username}</span>
+                        </div>
+                        <div className="detail cl_1">
                             <label>Age: </label>
                             <span>{userData.age}</span>
                         </div>
-                        <div className="detail">
-                            <label>Contact Number: </label>
-                            <span>{userData.contactNo}</span>
-                        </div>
-                        <div className="detail">
+                        <div className="detail cl_2">
                             <label>Gender: </label>
                             <span>{userData.gender}</span>
                         </div>
-                        <div className="detail">
+                        <div className="detail cl_1">
+                            <label>Contact Number: </label>
+                            <span>{userData.contactNo}</span>
+                        </div>
+                        <div className="detail cl_2">
+                            <label>Email: </label>
+                            <span>{userData.email}</span>
+                        </div>
+                        <div className="detail cl_1" style={{borderBottomLeftRadius:'10px', borderBottomRightRadius:'10px'}}>
                             <label>Expert Level: </label>
                             <span>{userData.level}</span>
-                        </div></>
+                        </div>
+                        </>
                 :null
                 }   
             </div>

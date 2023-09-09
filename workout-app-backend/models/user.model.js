@@ -30,11 +30,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    heigth:{
-        type: Number
+    contactNo:{
+        type: String
     },
-    weigth:{
-        type: Number
+    email:{
+        type: String
+    },
+    level:{
+        type: String
     },
     //map=>(workout, time, duration, status, periodCal, etc)
     workouts:{

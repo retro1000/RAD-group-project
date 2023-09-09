@@ -27,14 +27,14 @@ const getMyWorkoutsByUserId = async(userId) => {
 const getUserDetailsByUsername = async(username) => {
     try{
         return await User.findOne({username:username})
-            .select('userId name age gender height weigth username workouts')
+            .select('userId name age username gender level email conatctNo username')
             || (()=>{throw new Error('No username found');})();
     }catch(err){
         throw err;
     }
 }
 
-const createNewUser = async(name, username, password, age, gender, heigth, weigth, role) => {
+const createNewUser = async(name, username, password, age, gender, email, contactNo, level, role) => {
     const session = await mongoose.startSession();
     try{
         session.startTransaction();
@@ -52,8 +52,9 @@ const createNewUser = async(name, username, password, age, gender, heigth, weigt
             gender:gender,
             username:username,
             password:hashPassword,
-            heigth:heigth,
-            weigth:weigth,
+            level:level,
+            email:email,
+            contactNo:contactNo,
             workouts:[],
             roles: [roles]
         })

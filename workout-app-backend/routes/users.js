@@ -5,7 +5,7 @@ import { Middleware } from '../config/middleware.config.js';
 
 const router = express.Router();
 
-router.route('/view').get(Middleware.ensureAuthenticated, async(req, res) => {
+router.route('/view').post(Middleware.ensureAuthenticated, async(req, res) => {
     try{
         return res.status(200).json({details: await UserQueries.getUserDetailsByUsername(req.user.username)});
     }catch(err){
