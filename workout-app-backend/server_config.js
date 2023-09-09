@@ -16,11 +16,10 @@ import bodyPartRoutes from './routes/body_part.js';
 import exersiceRoutes from './routes/exersice.js';
 import roleRoutes from './routes/role.js';
 import workoutRoutes from './routes/workout.js';
-import { ExersiceQueries } from './queries/exercise.query.js';
+import { UserQueries } from "./queries/user.query.js";
+import userRoutes from './routes/users.js';
 import bcrypt from 'bcrypt';
-import {UserQueries} from './queries/user.query.js';
 import flash from 'express-flash';
-import {API} from './config/ninja_api.config.js';
 
 dotenv.config();
 
@@ -120,6 +119,7 @@ app.use('/bodyParts', bodyPartRoutes);
 app.use('/exercises', exersiceRoutes);
 app.use('/role', roleRoutes);
 app.use('/workouts', workoutRoutes);
+app.use('/users', userRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

@@ -1,0 +1,63 @@
+/* CombinedStyles.css */
+.exercise-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .image-description-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .exercise-image {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .details-table,
+  .steps-table {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .details-table h2,
+  .steps-table h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .details-table table,
+  .steps-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .details-table th,
+  .details-table td,
+  .steps-table th,
+  .steps-table td {
+    border: 1px solid #0b0000;
+    padding: 8px;
+  }
+  
+  .details-table th,
+  .steps-table th {
+    background-color: #ca1212;
+  }
+  
+  .details-table tr:nth-child(even),
+  .steps-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .details-table tr:nth-child(odd),
+  .steps-table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  
+  

@@ -8,12 +8,13 @@ import {CommonQueries} from '../queries/common.query.js';
 
 dotenv.config();
 
-const getWorkoutByRules = async(bodyPartId, age, gender, start, limit) => {
+const getWorkoutByRules = async(bodyParts, difficulties, types) => {
     try{
-        return await Workout.find({age:age, gender:gender, bodyPartId:bodyPartId})
-            .select('workoutId name img')
-            .skip(start)
-            .limit(limit) || (()=>{throw new Error('No workout found');})();
+        const combinations = [];
+        const filter = {$or: [] };
+        for(const bodyPartIds of bodyParts) for(const type of types) for(const difficulty of difficulties) combinations.push({type, difficulty, bodyPartIds});
+        for (const combo in combinations) filter.$or.push({type:combinations[combo].type, difficulty:combinations[combo].difficulty, bodyPartIds:combinations[combo].bodyPartIds});
+        return await Workout.find(filter).select('workoutId name img') || (()=>{throw new Error('No workout found');})();
     }catch(err){
         throw err;
     }
@@ -21,16 +22,15 @@ const getWorkoutByRules = async(bodyPartId, age, gender, start, limit) => {
 
 const getWorkoutSortKeys = async(bodyPartId) => {
     try{
-        var list = {difficulty:[], age:[], gender:[]};
-        const values = await Workout.find({bodyPartIds:{$in: bodyPartId}}).select('difficulty age gender') || (()=>{throw new Error('No exercise found');})();
+        var list = {difficulty:[], type:[]};
+        const values = await Workout.find({bodyPartIds:{$in: bodyPartId}}).select('difficulty type') || (()=>{throw new Error('No exercise found');})();
         for(const itm in values){
-            const{difficulty, age, gender} = values[itm];
+            const{difficulty, type} = values[itm];
             list.difficulty.push(difficulty);
-            list.age.push(age);
-            list.gender.push(gender);
+            list.type.push(type);
         }
         for(const key in list) list[key]=[...(new Set(list[key]))];
-        return [{name:'Difficulty', val:list.difficulty}, {name:'Age', val:list.age}, {name:'Gender', val:list.gender}];
+        return [{name:'Difficulty', val:list.difficulty}, {name:'Type', val:list.type}];
     }catch(err){
         throw err;
     }
@@ -53,8 +53,8 @@ const createNewWorkoutForUser = async(bodyPartId, userId, workoutData) => {
         const workoutDetails = new Workout({
             workoutId:workoutId,
             name:workoutData.name,
-            age:workoutData.age,
-            gender:workoutData.gender,
+            type:workoutData.type,
+            difficulty:workoutData.difficulty,
             period:process.env.WORKOUT_DURATION,
             bodyPartId:bodyPartId,
             exercises:workoutData.exersiceList
@@ -72,31 +72,31 @@ const createNewWorkoutForUser = async(bodyPartId, userId, workoutData) => {
     }
 }
 
-const createNewWorkout = async(bodyPartId, workoutData) => {
-    const session = await Mongoose.startSession();
-    try{
-        session.startSession();
-        const existingIds = (await Workout.find().select('workoutId')).map(Id=>Id.workoutId);
-        const workoutId = await CommonQueries.generateUniqueId(existingIds, existingIds.lenght+1);
-        const workoutDetails = new Workout({
-            workoutId:workoutId,
-            name:workoutData.name,
-            age:workoutData.age,
-            gender:workoutData.gender,
-            period:process.env.WORKOUT_DURATION,
-            bodyPartId:bodyPartId,
-            exercises:workoutData.exersiceList
-        });
-        workoutDetails.save();
-        await BodyPartQueries.updateWorkoutList(bodyPartId, workoutId);
-        await session.commitTransaction();
-    }catch(err){
-        await session.abortTransaction();
-        throw err;
-    }finally{
-        await session.endSession();
-    }
-}
+// const createNewWorkout = async(bodyPartId, workoutData) => {
+//     const session = await Mongoose.startSession();
+//     try{
+//         session.startSession();
+//         const existingIds = (await Workout.find().select('workoutId')).map(Id=>Id.workoutId);
+//         const workoutId = await CommonQueries.generateUniqueId(existingIds, existingIds.lenght+1);
+//         const workoutDetails = new Workout({
+//             workoutId:workoutId,
+//             name:workoutData.name,
+//             age:workoutData.age,
+//             gender:workoutData.gender,
+//             period:process.env.WORKOUT_DURATION,
+//             bodyPartId:bodyPartId,
+//             exercises:workoutData.exersiceList
+//         });
+//         workoutDetails.save();
+//         await BodyPartQueries.updateWorkoutList(bodyPartId, workoutId);
+//         await session.commitTransaction();
+//     }catch(err){
+//         await session.abortTransaction();
+//         throw err;
+//     }finally{
+//         await session.endSession();
+//     }
+// }
 
 const calculateTime = async(workoutId) => {
     try{
@@ -107,4 +107,4 @@ const calculateTime = async(workoutId) => {
     }
 }
 
-export const WorkoutQueries = {getWorkoutSortKeys, calculateTime, createNewWorkout, createNewWorkoutForUser, getWorkoutById, getWorkoutByRules};
+export const WorkoutQueries = {getWorkoutSortKeys, calculateTime, createNewWorkoutForUser, getWorkoutById, getWorkoutByRules};

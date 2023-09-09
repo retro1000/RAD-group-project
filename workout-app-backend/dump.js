@@ -30,38 +30,39 @@ const y = async(element)=>{
 
 async function func(){
     try{
-        // const p = await API.api('abdominals', 10);
-    // console.log(p[0]);
-    // const element = p[0];
+        const p = await API.api('abdominals', 10);
+    console.log(p[0]);
+    const element = p[0];
     
-        // await ExersiceQueries.createNewExersice(element.name.replace(/[_-]/g, ' '), (element.type.charAt(0).toUpperCase() + element.type.slice(1)).replace(/[_-]/g, ' '), (element.equipment.charAt(0).toUpperCase() + element.equipment.slice(1)).replace(/[_-]/g, ' '), (element.difficulty.charAt(0).toUpperCase()+element.difficulty.slice(1)).replace(/[_-]/g, ' '), null, null, null, null, element.instructions.split('.'), [1]);
     
-    const p = [
-        {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
-        {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
-        {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
-        {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
-        {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
-        {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'}
-    ];
+    for(var i=1;i>p.length;i++) await ExersiceQueries.createNewExersice(i, p[i].name.replace(/[_-]/g, ' '), (p[i].type.charAt(0).toUpperCase() + p[i].type.slice(1)).replace(/[_-]/g, ' '), (p[i].equipment.charAt(0).toUpperCase() + p[i].equipment.slice(1)).replace(/[_-]/g, ' '), (p[i].difficulty.charAt(0).toUpperCase()+p[i].difficulty.slice(1)).replace(/[_-]/g, ' '), null, null, null, null, p[i].instructions.split('.'), [1]);
+    
+    // const p = [
+    //     {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
+    //     {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
+    //     {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
+    //     {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
+    //     {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'},
+    //     {name:'tacobell', type:'cardio', equipment:'dumbell', difficulty:'expert', instructions:'jshshh. kdskjss. kskssk'}
+    // ];
 
-     const x = p.map(async function add(element, counter=50){
-         console.log(element.name);
-            await ExersiceQueries.createNewExersice(
-                element.name.replace(/[_\-\/]/g, ' '),
-                (element.type.charAt(0).toUpperCase() + element.type.slice(1)).replace(/[_\-\/]/g, ' '),
-                (element.equipment.charAt(0).toUpperCase() + element.equipment.slice(1)).replace(/[_\-\/]/g, ' '),
-                (element.difficulty.charAt(0).toUpperCase() + element.difficulty.slice(1)).replace(/[_\-\/]/g, ' '),
-                null,
-                null,
-                null,
-                null,
-                element.instructions.split('. '),
-                [1]
-            );
-     });
-     await Promise.all(x);
-    console.log(x);
+    //  const x = p.map(async function add(element, counter=50){
+    //      console.log(element.name);
+    //         await ExersiceQueries.createNewExersice(
+    //             element.name.replace(/[_\-\/]/g, ' '),
+    //             (element.type.charAt(0).toUpperCase() + element.type.slice(1)).replace(/[_\-\/]/g, ' '),
+    //             (element.equipment.charAt(0).toUpperCase() + element.equipment.slice(1)).replace(/[_\-\/]/g, ' '),
+    //             (element.difficulty.charAt(0).toUpperCase() + element.difficulty.slice(1)).replace(/[_\-\/]/g, ' '),
+    //             null,
+    //             null,
+    //             null,
+    //             null,
+    //             element.instructions.split('. '),
+    //             [1]
+    //         );
+    //  });
+    //  await Promise.all(x);
+    // console.log(x);
     }catch(err){
         console.log(err.message);
     }

@@ -28,10 +28,10 @@ function App() {
         <Route path="/workout" element={<WorkoutPage />} />
         <Route path="/workout/workouts/view" element={<ViewPage />} />
         <Route path="/workout/exercises/view" element={<ViewPage />} />
-        <Route path="/exersice" element={<ViewExersicePage />} />
+        {/* <Route path="/exersice" element={<ViewExersicePage />} /> */}
         <Route path="/my_workouts" element={<MyWorkoutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/exercise" element={<ExercisePage />} />
+        <Route path="/exercises/view-one/:id" element={<ExercisePage />} />
         {/* <Route default element={<LoginPage />} /> */}
       </Routes>
     </Router>

@@ -5,7 +5,7 @@ import { Middleware } from '../config/middleware.config.js';
 
 const router = express.Router();
 
-router.route('/').post(async(req, res) => {
+router.route('/').post(Middleware.ensureAuthenticated, async(req, res) => {
     try{
         const data = req.body;
         return res.status(200).json({dataList: await ExersiceQueries.getExersiceByRules([data.bodyPartId], data.sortOptions[0].val, data.sortOptions[1].val, data.sortOptions[2].val)});
@@ -23,9 +23,9 @@ router.route('/sort_key').post(Middleware.ensureAuthenticated, async(req, res) =
     }
 });
 
-router.route('/view').post(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin', 'users']), async(req, res) => {
+router.route('/view').post(Middleware.ensureAuthenticated, async(req, res) => {
     try{
-        return res.status(200).json(await ExersiceQueries.getExersiceById(req.body.exersiceId));
+        return res.status(200).json({details: await ExersiceQueries.getExersiceById(req.body.id)});
     }catch(err){
         console.log('Error:', err);
         return res.status(500).json({error: 'An error occured.'});

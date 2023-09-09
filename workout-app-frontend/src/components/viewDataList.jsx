@@ -44,7 +44,7 @@ function ViewDataList(props){
                 <div className="data_itm">
                     {
                         (props.dataList !== undefined)?props.dataList.map(itm => (
-                            <DataItem type={props.type} id={itm.id} name={itm.name} img={itm.img}/>
+                            <DataItem type={props.type} id={itm.exersiceId} name={itm.name} img={itm.img}/>
                         )):null
                     }
                 </div>

@@ -1,15 +1,17 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import "../component_style/numberedListStyle.css"
+import "../component_style/numberedListStyle.css";
 
-function NumberedList() {
+function NumberedList(props) {
   return (
     <div>
-      <ListGroup as="ol" numbered>
-        <ListGroup.Item as="li">Cras justo odio</ListGroup.Item>
-        <ListGroup.Item as="li">Cras justo odio</ListGroup.Item>
-        <ListGroup.Item as="li">Cras justo odio</ListGroup.Item>
-      </ListGroup>
+      {props.steps !== null && props.steps !== undefined ? (
+        <ListGroup as="ol" numbered>
+          {props.steps.map((li) => (
+            <ListGroup.Item as="li">{li}</ListGroup.Item>
+          ))}
+        </ListGroup>
+      ) : null}
     </div>
   );
 }

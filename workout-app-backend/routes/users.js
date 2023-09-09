@@ -1,9 +1,18 @@
 import express from 'express';
 import {UserQueries} from '../queries/user.query.js';
-import { WorkoutQuery } from '../queries/workout.query.js';
+import { WorkoutQueries } from '../queries/workout.query.js';
 import { Middleware } from '../config/middleware.config.js';
 
 const router = express.Router();
+
+router.route('/view').get(Middleware.ensureAuthenticated, async(req, res) => {
+    try{
+        return res.status(200).json({details: await UserQueries.getUserDetailsByUsername(req.user.username)});
+    }catch(err){
+        console.log('Error:', err);
+        return res.status(500).json({error: 'An error occured.'});
+    }
+});
 
 router.route('/my-workouts').post(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin', 'users']), async(req, res) => {
     try{

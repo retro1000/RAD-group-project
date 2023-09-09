@@ -14,12 +14,11 @@ const workoutSchema = new Schema({
         trim: true,
         minlength: 5
     },
-    age:{
-        type: [Number],
-        trim: true,
+    type:{
+        type: String
     },
-    gender:{
-        type: [String]
+    difficulty:{
+        type: String
     },
     period:{
         type: Number,

@@ -9,7 +9,6 @@ const getExersiceByRules = async(bodyParts, types, difficulties, equipments) => 
         const filter = {$or: [] };
         for(const bodyPartIds of bodyParts) for(const type of types) for(const difficulty of difficulties) for(const equipment of equipments) combinations.push({type, difficulty, equipment, bodyPartIds});
         for (const combo in combinations) filter.$or.push({type:combinations[combo].type, equipment:combinations[combo].equipment, difficulty:combinations[combo].difficulty, bodyPartIds:combinations[combo].bodyPartIds});
-        console.log(filter);
         return await Exersice.find(filter).select('exersiceId name img') || (()=>{throw new Error('No exercise found');})();
     }catch(err){
         throw err;
@@ -36,7 +35,7 @@ const getExersiceSortKeys = async(bodyPartId) => {
 const getExersiceById = async(exersiceId) => {
     try{
         return await Exersice.findOne({exersiceId: exersiceId})
-            .select('exersiceId name type equipment difficulty steps mainImage images')
+            .select('exersiceId name type equipment difficulty steps img')
             || (()=>{throw new Error('No exersiceId found');})();
     }catch(err){
         throw err;

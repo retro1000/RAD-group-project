@@ -33,9 +33,9 @@ function ViewPage(props){
             await axios.post(`http://localhost:6600/${details[1]}/sort_key`, {bodyPartId:details[0]}, {maxRedirects:0, withCredentials: true})
                 .then(Response=>{
                     if(Response.status === 200){
-                        const newList = Response.data.sortList.map(lc=>({name:lc.name, data:lc.data.map(ct=>({val:ct, sts:false}))}));
+                        const newList = Response.data.sortList.map(lc=>({name:lc.name, data:lc.data.map((ct, index)=>({val:ct, sts:(index!==0)?false:true}))}));
                         setSortList(newList);
-                        const newSort = newList.map(itm=>({name:itm.name, val:[]}));
+                        const newSort = newList.map(itm=>({name:itm.name, val:[itm.data[0].val]}));
                         setSort(newSort);
                     }
                     if(Response.status === 403) navigate('/login');
