@@ -26,7 +26,7 @@
   
   label {
     font-weight: bold;
-    color: #ed084d;
+    color: #000000;
     display: block; /* Place each label on a new line */
     margin-bottom: 5px; /* Add some space between labels and inputs */
   }

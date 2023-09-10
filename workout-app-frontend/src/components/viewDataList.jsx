@@ -46,8 +46,8 @@ function ViewDataList(props){
 
     const handleSelectedList = (id, name, img) => {
         const newList = selectedList;
-        if(selectedList.length === 0) newList.push({id:id, name:name, img:img, reps:1});
-        if (!selectedList.some(item => item.id === id)) newList.push({id:id, name:name, img:img, reps:1});
+        if(selectedList.length === 0) newList.push({id:id, name:name, mainImage:img, reps:1});
+        if (!selectedList.some(item => item.id === id)) newList.push({id:id, name:name, mainImage:img, reps:1});
         setSelectedList(...[newList]);
     }
 
@@ -102,7 +102,7 @@ function ViewDataList(props){
                 <div className="data_itm">
                     {
                         (props.dataList !== undefined)?props.dataList.map(itm => (
-                            <DataItem handleSelectedList={handleSelectedList} type={props.type} id={itm.exersiceId} name={itm.name} img={itm.img}/>
+                            <DataItem handleSelectedList={handleSelectedList} type={props.type} id={(itm.exersiceId)?itm.exersiceId:itm.workoutId} name={itm.name} img={(itm.mainImage)?itm.mainImage:itm.img}/>
                         )):null
                     }
                 </div>
@@ -114,7 +114,7 @@ function ViewDataList(props){
                         {
                             (props.type === 'exercises' && selectedList.length !== 0)?
                                 selectedList.map(itm => (
-                                    <Exercise getReps={getReps} reps={null} handleCancel={handleCancel} cancel={true} name={itm.name} img={itm.img} id={itm.id}/>
+                                    <Exercise getReps={getReps} reps={null} handleCancel={handleCancel} cancel={true} name={itm.name} img={itm.mainImage} id={itm.id}/>
                                 )):null
                         }
                         

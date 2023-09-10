@@ -13,15 +13,13 @@ function Bio(props) {
             props.handleLoading(true);
             axios.post('http://localhost:6600/users/view',{}, {maxRedirects:0, withCredentials: true})
                 .then(Response=>{
+                    props.handleLoading(false);
                     if(Response.status === 200) setUserData(Response.data.details);
                     if(Response.status === 403) navigate('/login');
                 })
                 .catch(Error=>{
-
+                    props.handleLoading(false);
                 })
-                .finally(
-                    props.handleLoading(false)
-                )
         }
 
         if(userData === null) getData();
@@ -29,26 +27,26 @@ function Bio(props) {
 
     return (
         <div className="bio-frame">
-            <h1>Bio</h1>
+            {(userData !== null)?<h1>Bio</h1>:null}
             <div className="about">
                 {
                     (userData !== null)?
                         <>
                         <div className="detail cl_1" style={{borderTopLeftRadius:'10px', borderTopRightRadius:'10px'}}>
                             <label>Full Name: </label>
-                            <span>{userData.name}</span>
+                            <span className="sp_1">{userData.name}</span>
                         </div>
                         <div className="detail cl_2">
                             <label>Username: </label>
-                            <span>{userData.username}</span>
+                            <span className="sp_1">{userData.username}</span>
                         </div>
                         <div className="detail cl_1">
                             <label>Age: </label>
-                            <span>{userData.age}</span>
+                            <span className="sp_1">{userData.age}</span>
                         </div>
                         <div className="detail cl_2">
                             <label>Gender: </label>
-                            <span>{userData.gender}</span>
+                            <span className="sp_1">{userData.gender}</span>
                         </div>
                         <div className="detail cl_1">
                             <label>Contact Number: </label>
@@ -56,11 +54,11 @@ function Bio(props) {
                         </div>
                         <div className="detail cl_2">
                             <label>Email: </label>
-                            <span>{userData.email}</span>
+                            <span className="sp_1">{userData.email}</span>
                         </div>
                         <div className="detail cl_1" style={{borderBottomLeftRadius:'10px', borderBottomRightRadius:'10px'}}>
                             <label>Expert Level: </label>
-                            <span>{userData.level}</span>
+                            <span className="sp_1">{userData.level}</span>
                         </div>
                         </>
                 :null

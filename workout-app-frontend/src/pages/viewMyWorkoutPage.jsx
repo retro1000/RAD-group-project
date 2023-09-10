@@ -40,7 +40,7 @@ function ViewMyWorkoutPage(){
                 .then(Response=>{
                     if(Response.status === 200){
                         const newList = Response.data.details.map((data, index) => (
-                            {exersiceId:data.exersiceId, name:data.name, img:data.img, reps:exerciseData[index].reps}
+                            {exersiceId:data.exersiceId, name:data.name, mainImage:data.mainImage, reps:exerciseData[index].reps}
                         ));
                         setExercises(...[newList]);
                     }

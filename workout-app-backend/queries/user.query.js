@@ -72,7 +72,7 @@ const createNewUser = async(name, username, password, age, gender, email, contac
             workouts:[],
             roles: [roles]
         })
-        await userDetails.save();
+        await userDetails.save() || (()=>{throw new Error('username exist');})();
         await session.commitTransaction();
     }catch(err){
         await session.abortTransaction();

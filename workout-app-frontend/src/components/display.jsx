@@ -11,8 +11,8 @@ function Display(props){
         if(props.footerOn){
             props.handleLoading(true);
             axios.get('https://api.api-ninjas.com/v1/quotes?category=inspirational', {
-                                    Headers:{
-                                        'X-Api-Key': 'UuRylwHO0fo57hxZhRoZhYTobArfCI6A1oI27TY2',
+                                    headers:{
+                                        'X-Api-Key': 'KmKZYk8ztUsMG8f69ln7upLSwcNNnQTOQZCumKdq',
                                     }
                                 })
                                 .then((Response) => {

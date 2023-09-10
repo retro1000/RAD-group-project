@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import image1 from "../images/wall.webp";
 import "../component_style/exercise_style.css";
 
 function Exercise(props) {
@@ -19,7 +18,7 @@ function Exercise(props) {
 
   return (
     <div className="exercise-card">
-      <img src={image1} alt="Exercise" className="exercise-image" />
+      <img src={`/${props.img}`} alt="Exercise" className="exercise-image" />
 
       <div className="exercise-name">
         <span>{props.name}</span>

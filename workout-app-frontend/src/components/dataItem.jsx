@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../component_style/data_item.css";
-import Img from "../images/wall.webp";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +42,7 @@ function DataItem(props){
     
     return(
         <div className="data_item_frame">
-            <img src={Img} alt="" />
+            <img src={`/${props.img}`} alt="" />
             <span>{props.name}</span>
             <div>
                 <button onClick={handleClick}>{(props.type!=='exercises')?'Follow':'Add'}</button>

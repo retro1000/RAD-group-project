@@ -61,8 +61,10 @@ function DashboardPage(){
             <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
                 <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'dashboard':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
                 <Display footerOn={false} handleLoading={handleLoading}>
-                    <Bio handleLoading={handleLoading}/>
-                    <BmiCalculator />
+                    <div style={{background:'white', width:'1000px', height:'auto', padding:'20px', borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'top', alignItems:'center'}}>
+                        <Bio handleLoading={handleLoading} loading={loading}/>
+                        <BmiCalculator />
+                    </div>
                 </Display>
                 <AboutUs getLocation={getLocation}/>
             </div>

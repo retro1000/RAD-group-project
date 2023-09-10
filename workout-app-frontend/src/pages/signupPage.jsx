@@ -7,8 +7,8 @@ function SignUpPage(){
 
     const [loading, setLoading] = useState(false);
 
-    const handleLoading = () => {
-        setLoading(!loading);
+    const handleLoading = (val) => {
+        setLoading(val);
     }
 
     return(
@@ -16,7 +16,7 @@ function SignUpPage(){
             <div style={{pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null, display:'flex', justifyContent:'center', alignItems:'center', height:'100vh', width:'100vw',backgroundImage:`url(${BackgroundImage})`, backgroundRepeat:'no-repeat', backgroundSize:'cover', margin:'0', padding:'0'}}>
                 <SignUp handleLoading={handleLoading} />
             </div>
-            <Loading right={'50%'} left={'50%'} top={'50%'} bottom={'50%'} handleLoading={handleLoading} />
+            <Loading right={'50%'} left={'50%'} top={'50%'} bottom={'50%'} loading={loading} />
         </div>
     );
 }

@@ -9,7 +9,7 @@
     overflow: hidden;
     position: relative;
     display: flex; /* Use flex to control child elements */
-    flex-direction: column; /* Display children in a column layout */
+    flex-direction: column;
 }
 
 .video-card:hover {
@@ -21,11 +21,14 @@
     width: auto; /* Ensure the container takes up the full width */
     height: auto; /* Allow the image's height to adjust */
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .video-thumbnail img {
     width: 100%;
-    height: auto;
+    height: 100%; 
     object-fit: cover; /* Make the image cover the entire container */
 }
 

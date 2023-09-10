@@ -11,7 +11,7 @@ function VideoCardList() {
           <VideoCard
             videoLink="https://www.youtube.com/watch?v=rzNBx_B4pQ4"
             description="WarmUp Exercises"
-            imageUrl="https://fitnessprogramer.com/wp-content/uploads/2023/02/warm-up-exercises.png"
+            imageUrl="https://freerangestock.com/sample/76085/fitness-tips-indicates-exercising-and-workout-tricks.jpg"
           />
         </li>
         <li>
@@ -25,7 +25,7 @@ function VideoCardList() {
           <VideoCard
             videoLink="https://www.youtube.com/watch?v=Qy3U09CnELI"
             description="CoolDown Stretches"
-            imageUrl="https://i.ytimg.com/vi/tXWh-dowiLg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB07PP4QZKiIDhw7j6AWDDNy2AoIQ"
+            imageUrl="https://freerangestock.com/sample/76085/fitness-tips-indicates-exercising-and-workout-tricks.jpg"
           />
         </li>
       </ul>

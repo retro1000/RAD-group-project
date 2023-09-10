@@ -37,40 +37,19 @@
     align-items: center;
 }
 
-.row{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 400px;
-    position: relative;
-    right: -100px;
-    margin-bottom: 10px;
-}
-
 #signup_frame #form_section form .warning{
     color: rgb(255, 0, 0);
     font-weight: 700;
     font-size: 14px;
     position: relative;
-    width: 400px;
-    top: 23px;
-    left: -140px;
-}
-
-#signup_frame #form_section form .warning p{
-    width: 400px;
-}
-
-#signup_frame #form_section form .input_sec{
-    width: 600px;
+    top: -6px;
+    /* left: -150px; */
 }
 
 #signup_frame #form_section form .text_label{
     font-size: 15px;
     color: white;
     font-weight: 600;
-    width: 100px;
 }
 
 #signup_frame #form_section form .text{
@@ -112,10 +91,10 @@
 }
 
 #signup_frame #form_section form > div{
-    width: 100%;
+    width: 400px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 10px;
     height: auto;
 }

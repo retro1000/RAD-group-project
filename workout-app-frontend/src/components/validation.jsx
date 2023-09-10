@@ -17,6 +17,10 @@ function validation(values){
         error[1].email = "Email didn't Match"
         error[0]=true
     }
+    else{
+        error[1].email = null
+        error[0]=false
+    }
 
     if(values.first_name === ''){
         error[1].first_name = "firstname should not be empty"
@@ -27,6 +31,11 @@ function validation(values){
         error[1].first_name = "Firstname didn't Match"
         error[0]=true
     }
+    else{
+        error[1].first_name = null
+        error[0]=false
+    }
+
     if(values.last_name === ''){
         error[1].last_name = "Lastname should not be empty"
         error[0]=true
@@ -36,6 +45,11 @@ function validation(values){
         error[1].last_name = "Lastname didn't Match"
         error[0]=true
     }
+    else{
+        error[1].last_name = null
+        error[0]=false
+    }
+
     if(values.age === ''){
         error[1].age = "Age should not be empty"
         error[0]=true
@@ -45,15 +59,22 @@ function validation(values){
         error[1].age = "Age didn't Match"
         error[0]=true
     }
+    else{
+        error[1].age = null
+        error[0]=false
+    }
+
     if(values.contact_no === ''){
         error[1].contact_no = "ContactNo should not be empty"
         error[0]=true
-    }
-
-    else if(!contactno_pattern.test(values.contact_no)){
+    }else if(!contactno_pattern.test(values.contact_no)){
         error[1].contact_no = "ContactNo didn't Match"
         error[0]=true
+    }else{
+        error[1].contact_no = null
+        error[0]=false
     }
+
     if(values.username === ''){
         error[1].username = "Username should not be empty"
         error[0]=true
@@ -63,6 +84,10 @@ function validation(values){
         error[1].username = "Username didn't Match"
         error[0]=true
     }
+    else{
+        error[1].username = null
+        error[0]=false
+    }
     if(values.password === ''){
         error[1].password = "Password should not be empty"
         error[0]=true
@@ -71,6 +96,10 @@ function validation(values){
     else if(!password_pattern.test(values.password)){
         error[1].password = "Password didn't Match"
         error[0]=true
+    }
+    else{
+        error[1].password = null
+        error[0]=false
     }
    
     return error; 

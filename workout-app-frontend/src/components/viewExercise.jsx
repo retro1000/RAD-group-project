@@ -8,11 +8,13 @@ function ViewExercise(props) {
   return (
     <div className='exercise-container'>
         <div className='image-description-container'>
-            <h1>{props.data.name}</h1>
-            <img src='https://fitnessprogramer.com/wp-content/uploads/2023/02/warm-up-exercises.png' alt='Exercise' className='exercise-image'/>
+            <h1 className='exercise-name'>{props.data.name}</h1>
+            <img src={`/${props.data.mainImage}`} alt={props.data.name} className='exercise-image1'/>
         </div>
-        <TableComponentDetails type={props.data.type} difficulty={props.data.difficulty} equipment={props.data.equipment}/>
-        <TableComponentSteps tableData={props.data.steps}/>
+        <div className='table-container'>
+          <TableComponentDetails type={props.data.type} difficulty={props.data.difficulty} equipment={props.data.equipment}/>
+          <TableComponentSteps tableData={props.data.steps}/>
+        </div>
     </div>
   )
 }

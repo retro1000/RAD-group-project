@@ -44,10 +44,9 @@
     align-items: center;
   }
   
-  /* Style the detail section */
   .detail {
     display: flex;
-    flex-direction: row; /* Stack labels and values vertically */
+    flex-direction: row; 
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -61,8 +60,8 @@
     font-size: 22px;
     color: black;
   }
-  
-  .detail span {
+
+  .sp_1 {
     font-size: 19px;
     font-weight: bold;
   }

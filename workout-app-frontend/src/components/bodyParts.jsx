@@ -13,8 +13,9 @@ function BodyParts(props) {
     }
 
     useEffect(() => {
+        async function getData(){    
             props.handleLoading(true);
-            axios.get('http://localhost:6600/bodyParts', {maxRedirects:0, withCredentials:true})
+            await axios.get('http://localhost:6600/bodyParts', {maxRedirects:0, withCredentials:true})
                 .then(response => {
                     if(response.status === 403) navigate('/login');
                     if(response.status === 200) setBodyPartsList(response.data);
@@ -28,6 +29,9 @@ function BodyParts(props) {
                 .finally(
                     props.handleLoading(false)
                 );
+        }
+
+        getData();
     }, [navigate, props]);
 
     return (

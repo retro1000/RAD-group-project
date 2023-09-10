@@ -34,11 +34,11 @@
 
 #display_frame #footer #quote #quote_sec{
     color: white;
-    font-size: 33px;
+    font-size: 25px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 5px;
-    font-family: 'Dancing Script', cursive;
+    /* font-family: 'Dancing Script', cursive; */
 }
 
 #display_frame #footer #quote #author_sec{
@@ -46,7 +46,7 @@
     font-size: 15px;
     font-weight: 700;
     text-align: center;
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif; */
 }
 
 @keyframes und_anim{
