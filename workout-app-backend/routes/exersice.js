@@ -32,14 +32,13 @@ router.route('/view').post(Middleware.ensureAuthenticated, async(req, res) => {
     }
 })
 
-// router.route('/create').post(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin']), upload.single('mainImage'), upload.array('images', 5), async(req, res) => {
-//     try{
-//         const data = req.body;
-//         if(!await ExersiceQueries.createNewExersice(data.name, data.type, data.equipment, data.difficulty, data.age, data.gender, data.mainImage, data.images, data.steps, data.bodyPartIds)) return res.status(200).json({message: "Exercise succefully added"});
-//     }catch(err){
-//         console.log('Error:', err);
-//         return res.status(500).json({error: 'An error occured.'});
-//     }
-// });
+router.route('/getByIds').post(Middleware.ensureAuthenticated, async(req, res) => {
+    try{
+        return res.status(200).json({details: await ExersiceQueries.getExersiceByIds(req.body.ids)});
+    }catch(err){
+        console.log('Error:', err);
+        return res.status(500).json({error: 'An error occured.'});
+    }
+})
 
 export default router;

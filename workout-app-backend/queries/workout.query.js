@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import {BodyPartQueries} from '../queries/bodyPart.query.js';
 import {UserQueries} from '../queries/user.query.js';
 import {CommonQueries} from '../queries/common.query.js';
+import User from "../models/user.model.js";
 
 
 dotenv.config();
@@ -44,59 +45,24 @@ const getWorkoutById = async(workoutId) => {
     }
 }
 
-const createNewWorkoutForUser = async(bodyPartId, userId, workoutData) => {
-    const session = await Mongoose.startSession();
-    try{
-        session.startTransaction();
-        const existingIds = (await Workout.find().select('workoutId')).map(Id=>Id.workoutId);
-        const workoutId = await CommonQueries.generateUniqueId(existingIds, existingIds.lenght+1);
-        const workoutDetails = new Workout({
-            workoutId:workoutId,
-            name:workoutData.name,
-            type:workoutData.type,
-            difficulty:workoutData.difficulty,
-            period:process.env.WORKOUT_DURATION,
-            bodyPartId:bodyPartId,
-            exercises:workoutData.exersiceList
-        });
-        // await BodyPartQueries.updateWorkoutList(bodyPartId, workoutId);
-        const time = await calculateTime(workoutId);
-        await UserQueries.selectNewWorkout(userId, workoutId, time);
-        workoutDetails.save();
-        await session.commitTransaction();
-    }catch(err){
-        await session.abortTransaction();
-        throw err;
-    }finally{
-        await session.endSession();
-    }
+const getWorkoutId = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
-// const createNewWorkout = async(bodyPartId, workoutData) => {
-//     const session = await Mongoose.startSession();
-//     try{
-//         session.startSession();
-//         const existingIds = (await Workout.find().select('workoutId')).map(Id=>Id.workoutId);
-//         const workoutId = await CommonQueries.generateUniqueId(existingIds, existingIds.lenght+1);
-//         const workoutDetails = new Workout({
-//             workoutId:workoutId,
-//             name:workoutData.name,
-//             age:workoutData.age,
-//             gender:workoutData.gender,
-//             period:process.env.WORKOUT_DURATION,
-//             bodyPartId:bodyPartId,
-//             exercises:workoutData.exersiceList
-//         });
-//         workoutDetails.save();
-//         await BodyPartQueries.updateWorkoutList(bodyPartId, workoutId);
-//         await session.commitTransaction();
-//     }catch(err){
-//         await session.abortTransaction();
-//         throw err;
-//     }finally{
-//         await session.endSession();
-//     }
-// }
+const createNewWorkoutForUser = async(userId, workoutData, name) => {
+    try{
+        const workoutId = getWorkoutId(1, 100);
+        await User.findOneAndUpdate(
+            {userId:userId},
+            {$addToSet:{workouts:{'workoutId':workoutId, 'name':name, 'exerciseList':workoutData.map(itm=>({id:itm.id, reps:itm.reps})), 'time':process.env.WORKOUT_DURATION, 'status':'Ongoing', 'executionTime':0}}},
+            {new:false}
+        ) || (()=>{throw new Error('userId not found or workout exists');})();
+    }catch(err){
+        throw err;
+    }
+}
 
 const calculateTime = async(workoutId) => {
     try{

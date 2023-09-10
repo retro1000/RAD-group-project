@@ -60,7 +60,7 @@ function WorkoutPage(){
             <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
                 <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'workout':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
                 <Display footerOn={false} handleLoading={handleLoading}>
-                    <BodyParts type={'workouts'} para={'Choose a tailormade workout that fits your goal'} des={'Choose a workout for you'} handleLoading={handleLoading}/>
+                    {/* <BodyParts type={'workouts'} para={'Choose a tailormade workout that fits your goal'} des={'Choose a workout for you'} handleLoading={handleLoading}/> */}
                     <BodyParts type={'exercises'} para={'Create a your own custom workout that fits your goal'} des={'Create a custome workout for you'} handleLoading={handleLoading}/>
                 </Display>
                 <AboutUs getLocation={getLocation}/>

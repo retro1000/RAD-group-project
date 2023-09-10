@@ -8,7 +8,7 @@ function AboutUs(props){
 
     useEffect(() => {
         props.getLocation(scrollRef);
-    }, []);
+    }, [props]);
 
     return(
         <div id="about_us_frame" ref={scrollRef} style={{width:'98.7%', height:'350px', padding:'10px'}}>

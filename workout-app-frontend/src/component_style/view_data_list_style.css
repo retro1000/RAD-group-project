@@ -38,7 +38,7 @@
     min-width: 250px;
     padding: 6px 4px;
     border-radius: 10px;
-    background: rgba(208, 208, 208, 0.682);
+    /* background: rgba(208, 208, 208, 0.682); */
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -55,6 +55,7 @@
 .pnl_header_name{
     font-size: 17px;
     font-weight: 700;
+    color: black;
 }
 
 .data_pnl{
@@ -67,4 +68,44 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.selected_list{
+    padding: 10px;
+    background: rgba(208, 208, 208, 0.682);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.selected_list button{
+    width: 150px;
+    font-size: 15px;
+}
+
+.selected_list .btn_pnl{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.selected_list .data_pnl{
+    width: 250px;
+    background: rgba(208, 208, 208, 0.682);
+    margin-bottom: 20px;
+}
+
+.selected_list .data_pnl input{
+    width: 250px;
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+    height: 15px;
+    padding: 10px;
 }
