@@ -3,7 +3,7 @@ import Loading from "../components/loading";
 import NavBar from "../components/navbar";
 import Display from "../components/display";
 import AboutUs from "../components/aboutUs";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ViewExercise from "../components/viewExercise";
 import axios from "axios";
 
@@ -14,7 +14,6 @@ function ExercisePage(props){
     const [scrollInAboutUs, setScrollInAboutUs] = useState(false);
     const [scrollUp, setScrollUp] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation();
     const realPage = useRef('workout');
     const [exerciseDetails, setExerciseDetails] = useState(null);
 

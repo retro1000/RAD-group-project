@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState} from 'react';
 import "../component_style/login_style.css";
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';

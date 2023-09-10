@@ -133,7 +133,7 @@ function ViewPage(props){
             <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
                 <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'workout':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
                 <Display footerOn={false} handleLoading={handleLoading}>
-                    <ViewDataList type={(details[1]==='exercises')?'exercises':'workouts'}handleLoading={handleLoading} dataList={dataList} sort={sort} sortList={sortList} handleSortList={handleSortList} handleSort={handleSort}/>
+                    <ViewDataList bodyPartId={details[0]}type={(details[1]==='exercises')?'exercises':'workouts'}handleLoading={handleLoading} dataList={dataList} sort={sort} sortList={sortList} handleSortList={handleSortList} handleSort={handleSort}/>
                 </Display>
                 <AboutUs getLocation={getLocation}/>
             </div>

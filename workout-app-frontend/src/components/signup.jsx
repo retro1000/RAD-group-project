@@ -113,9 +113,9 @@ function SignUp(props){
                     <div className="input_sec" style={{position: 'relative', right: '-100px'}}>
                         <label className="text_label" for="gender">Gender</label>
                         <div id="gender_sec">
-                            <input className="radio" type="radio" name="gender" ref={gender} defaultChecked/>
+                            <input className="radio" type="radio" value='Male' name="gender" ref={gender} defaultChecked/>
                             <label>Male</label>
-                            <input className="radio" type="radio" name="gender" ref={gender}/>
+                            <input className="radio" type="radio" name="gender" value='Female' ref={gender}/>
                             <label>Female</label>
                         </div>
                     </div>
@@ -123,11 +123,11 @@ function SignUp(props){
                     <div className="input_sec" style={{position: 'relative', right: '-100px'}}>
                         <label className="text_label" for="experiens">Experiens</label>
                         <div id="radio_sec"style={{position: 'relative', right: '95px'}}>
-                            <input className="radio" type="radio" name="radio" ref={experiense} defaultChecked/>
+                            <input className="radio" type="radio" name="radio" value='Beginner' ref={experiense} defaultChecked/>
                             <label>Beginner</label>
-                            <input className="radio" type="radio" name="radio" ref={experiense}/>
+                            <input className="radio" type="radio" name="radio" value='Intermediate' ref={experiense}/>
                             <label>Intermediate</label>
-                            <input className="radio" type="radio" name="radio" ref={experiense}/>
+                            <input className="radio" type="radio" name="radio" value='Expert' ref={experiense}/>
                             <label>Expert</label>
                         </div>
                     </div>

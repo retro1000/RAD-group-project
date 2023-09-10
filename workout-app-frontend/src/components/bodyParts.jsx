@@ -17,18 +17,19 @@ function BodyParts(props) {
             props.handleLoading(true);
             axios.get('http://localhost:6600/bodyParts', {maxRedirects:0, withCredentials:true})
                 .then(response => {
-                    props.handleLoading(false);
                     if(response.status === 403) navigate('/login');
                     if(response.status === 200) setBodyPartsList(response.data);
                     if(response.status === 500) navigate('/login');
                 })
                 .catch(error => {
-                    props.handleLoading(false);
                     if(error.response && error.response.status === 403) navigate('/login');
                     if(error.response && error.response.status === 500) console.log('Internal server error');
                     console.error('Error fetching body parts:', Error);
-                });
-    }, []);
+                })
+                .finally(
+                    props.handleLoading(false)
+                );
+    }, [navigate, props]);
 
     return (
         <div className='main_frame_body_part color' style={{flexDirection:'column'}}>

@@ -3,6 +3,9 @@ import NavBar from "../components/navbar";
 import Display from "../components/display";
 import AboutUs from "../components/aboutUs";
 import Loading from "../components/loading";
+import Workout from "../components/workout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function MyWorkoutPage(){
 
@@ -11,6 +14,23 @@ function MyWorkoutPage(){
     const [scrollUp, setScrollUp] = useState(false);
     const [scrollInAboutUs, setScrollInAboutUs] = useState(false);
     const realPage = useRef('my_workouts');
+    const [workoutData, setWorkoutData] = useState(null);
+    const navigate =  useNavigate();
+
+    useEffect(() => {
+        async function getData(){
+            await axios.get('http://localhost:6600/users/my-workouts', {withCredentials:true, maxRedirects:0})
+                .then(Response=>{
+                    if(Response.status === 200) setWorkoutData(Response.data.workouts);
+                    if(Response.status === 403) navigate('/login');
+                })
+                .catch(Error=>{
+
+                })
+        }
+
+        getData();
+    }, [navigate]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -56,10 +76,16 @@ function MyWorkoutPage(){
 
     return(
         <div>
-            <div style={{pointerEvents:(loading)?'none':null}}>
+            <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
                 <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'my_workouts':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
-                <Display footerOn={true} handleLoading={handleLoading}>
-                    
+                <Display footerOn={false} handleLoading={handleLoading}>
+                    {
+                        (workoutData !== null && workoutData.length > 0)?
+                            (workoutData.map(workout => (
+                                <Workout name={workout.name} status={workout.status} workoutId={workout.workoutId} />
+                            )))
+                        :null
+                    }
                 </Display>
                 <AboutUs getLocation={getLocation}/>
             </div>

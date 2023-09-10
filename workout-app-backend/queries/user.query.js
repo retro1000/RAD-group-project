@@ -16,9 +16,23 @@ const getUserByUsername = async(username) => {
 
 const getMyWorkoutsByUserId = async(userId) => {
     try{
-        return await User.findOne({userId:userId})
-            .select('workouts.$.workoutId workouts.$.status workouts.$.executionTime')
-            || (()=>{throw new Error('No workouts found');})();
+        const list = await User.findOne({userId:userId}) || (()=>{throw new Error('No workouts found');})();
+        if(!list) throw err;
+        return list.workouts.map((workout) => ({
+            workoutId:workout.get('workoutId'),
+            name: workout.get('name'),
+            status: workout.get('status'),
+        }));
+    }catch(err){
+        throw err;
+    }
+}
+
+const getMyWorkoutByIds = async(userId, id) => {
+    try{
+        const user = await User.findOne({userId:userId}) || (()=>{throw new Error('No workouts found');})();
+        const workout = user.workouts.find((workout) => workout.get('workoutId') === parseInt(id));
+        if(workout) return workout.get('exerciseList');
     }catch(err){
         throw err;
     }
@@ -92,14 +106,15 @@ const selectNewWorkout = async(userId, workoutId, time) => {
     }
 }
 
-const chooseNewWorkout = async(userId, workoutId) => {
+const chooseNewWorkout = async(userId, workoutId, name) => {
     const session = await Mongoose.startSession();
     try{
         session.startTransaction();
         const time = await WorkoutQueries.calculateTime(workoutId);
+        const list = await WorkoutQueries.getWorkoutById(workoutId);
         User.findOneAndUpdate(
             {userId:userId},
-            {$addToSet:{workouts:{'workoutId':workoutId, 'time':time, 'status':'Ongoing', 'executionTime':0}}},
+            {$addToSet:{workouts:{'workoutId':workoutId, 'name':name, 'img':img, 'exerciseList':list.exercises, 'time':time, 'status':'Ongoing', 'executionTime':0}}},
             {new:false}
         ) || (()=>{throw new Error('userId not found or workout exists');})();
         await session.commitTransaction();
@@ -133,4 +148,4 @@ const followWorkout = async(userId, workoutId, status) => {
     }
 }
 
-export const UserQueries = {followWorkout, getUserByUsername, getMyWorkoutsByUserId, getUserDetailsByUsername, updateWorkoutStatusByUserIdAndWorkoutId, selectNewWorkout, createNewUser, updateExecutionTimeByUserIdAndWorkoutId, chooseNewWorkout};
+export const UserQueries = {getMyWorkoutByIds, followWorkout, getUserByUsername, getMyWorkoutsByUserId, getUserDetailsByUsername, updateWorkoutStatusByUserIdAndWorkoutId, selectNewWorkout, createNewUser, updateExecutionTimeByUserIdAndWorkoutId, chooseNewWorkout};

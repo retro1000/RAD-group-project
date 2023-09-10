@@ -1,5 +1,3 @@
-//1234 - Damitha ps
-
 import passport from "passport";
 import expressSession from "express-session";
 import { Strategy as LocalStrategy } from 'passport-local';
@@ -8,9 +6,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from "cookie-parser";
-// import fs from 'fs';
 import dotenv from 'dotenv';
-// import loginRoutes from './routes/login.js';
 import signupRoutes from './routes/signup.js';
 import bodyPartRoutes from './routes/body_part.js';
 import exersiceRoutes from './routes/exersice.js';
@@ -113,7 +109,6 @@ app.get('/logout', (req, res) => {
     return res.status(200).json({message:'Logout!!!'});
 });
 
-// app.use('/login', loginRoutes);
 app.use('/signup', signupRoutes);
 app.use('/bodyParts', bodyPartRoutes);
 app.use('/exercises', exersiceRoutes);
@@ -124,12 +119,3 @@ app.use('/users', userRoutes);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-// export default {passport, localStrategy, express};
-
-// async function j(){
-//     const k = await ExersiceQueries.getExersiceSortKeys(1);
-//     console.log(k);
-// }
-
-// j();

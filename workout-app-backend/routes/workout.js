@@ -32,13 +32,4 @@ router.route('/view').post(Middleware.ensureAuthenticated, async(req, res) => {
     }
 })
 
-router.route('/create').post(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin']), upload.single('image'), (req, res) => {
-    try{
-        
-    }catch(err){
-        console.log('Error:', err);
-        return res.status(500).json({error: 'An error occured.'});
-    }
-});
-
 export default router;

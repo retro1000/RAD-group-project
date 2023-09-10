@@ -3,15 +3,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: top; /* Center vertically */
+  justify-content: center; /* Center vertically */
   background-color: #a6ac9f;
   border-radius: 5px;
   width: 1000px;
-  height: 900px;
+  height: auto;
   margin: 0 auto; /* Center horizontally by using auto margins */
+  padding: 20px;
 }
-
-
   
 .image-description-container {
   display: flex;
@@ -24,8 +23,8 @@
 }
   
 .exercise-image1 {
-  width: 800px; /* Increase the width to make the image larger */
-  height: 400px; /* Increase the height proportionally */
+  width: 500px; /* Increase the width to make the image larger */
+  height: 500px; /* Increase the height proportionally */
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
