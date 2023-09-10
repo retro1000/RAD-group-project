@@ -1,0 +1,116 @@
+.exercise-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #a6ac9f;
+  border-radius: 5px;
+  width: 1000px;
+  height: auto;
+  margin: 0 auto;
+  gap: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.image-description-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 900px;
+  height: 600px;
+  justify-content: top;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.exercise-image {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.exercise-name {
+  margin-top: 5px;
+  font-family: "Courier New";
+  font-weight: bolder;
+  font-style: oblique;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #0ad8e2;
+  /* Set your desired background color */
+  border-radius: 10px;
+  /* Add border radius if needed */
+  padding: 20px;
+  margin-top: 70px;
+  /* Add padding to create some space around the content */
+}
+
+.details-table,
+.steps-table {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.details-table h2,
+.steps-table h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  width: 900px;
+}
+
+.details-table table,
+.steps-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.details-table th,
+.details-table td,
+.steps-table th,
+.steps-table td {
+  border: 1px solid #0b0000;
+  padding: 8px;
+}
+
+.details-table th,
+.steps-table th {
+  background-color: #ca1212;
+}
+
+.details-table tr:nth-child(even),
+.steps-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.details-table tr:nth-child(odd),
+.steps-table tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.details-table td {
+  color: #333;
+  /* Change text color to dark gray */
+  font-size: 14px;
+  /* Change font size to 14 pixels */
+  font-family: Arial, sans-serif;
+  /* Change font type */
+}
+
+/* Modify the font size, color, and font-family for table data in steps-table */
+.steps-table td {
+  color: #333;
+  /* Change text color to dark gray */
+  font-size: 14px;
+  /* Change font size to 14 pixels */
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  /* Change font type */
+}

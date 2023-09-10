@@ -1,0 +1,111 @@
+#view_data_list_frame{
+    width: 95%;
+    padding: 10px;
+    height: auto;
+    min-height: 600px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding-top: 30px;
+}
+
+.dis_flx{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+.filter_pnl{
+    gap: 30px;
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.filter_pnl .display_pnl{
+    gap: 8px;
+}
+
+.filter_pnl .display_pnl .pnl_data_pnl{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 150px;
+    background: rgb(124, 124, 124);
+    min-width: 250px;
+    padding: 6px 4px;
+    border-radius: 10px;
+    /* background: rgba(208, 208, 208, 0.682); */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.labels{
+    margin: 4px;
+    width: max-content;
+    height: max-content;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.pnl_header_name{
+    font-size: 17px;
+    font-weight: 700;
+    color: black;
+}
+
+.data_pnl{
+    background: white;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.data_itm{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.selected_list{
+    padding: 10px;
+    background: rgba(208, 208, 208, 0.682);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.selected_list button{
+    width: 150px;
+    font-size: 15px;
+}
+
+.selected_list .btn_pnl{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.selected_list .data_pnl{
+    width: 250px;
+    background: rgba(208, 208, 208, 0.682);
+    margin-bottom: 20px;
+}
+
+.selected_list .data_pnl input{
+    width: 250px;
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+    height: 15px;
+    padding: 10px;
+}

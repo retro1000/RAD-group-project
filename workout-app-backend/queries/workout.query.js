@@ -4,16 +4,34 @@ import dotenv from 'dotenv';
 import {BodyPartQueries} from '../queries/bodyPart.query.js';
 import {UserQueries} from '../queries/user.query.js';
 import {CommonQueries} from '../queries/common.query.js';
+import User from "../models/user.model.js";
 
 
 dotenv.config();
 
-const getWorkoutByRules = async(bodyPartId, age, gender, start, limit) => {
+const getWorkoutByRules = async(bodyParts, difficulties, types) => {
     try{
-        return await Workout.find({age:age, gender:gender, bodyPartId:bodyPartId})
-            .select('workoutId name img')
-            .skip(start)
-            .limit(limit) || (()=>{throw new Error('No workout found');})();
+        const combinations = [];
+        const filter = {$or: [] };
+        for(const bodyPartIds of bodyParts) for(const type of types) for(const difficulty of difficulties) combinations.push({type, difficulty, bodyPartIds});
+        for (const combo in combinations) filter.$or.push({type:combinations[combo].type, difficulty:combinations[combo].difficulty, bodyPartIds:combinations[combo].bodyPartIds});
+        return await Workout.find(filter).select('workoutId name img') || (()=>{throw new Error('No workout found');})();
+    }catch(err){
+        throw err;
+    }
+}
+
+const getWorkoutSortKeys = async(bodyPartId) => {
+    try{
+        var list = {difficulty:[], type:[]};
+        const values = await Workout.find({bodyPartIds:{$in: bodyPartId}}).select('difficulty type') || (()=>{throw new Error('No exercise found');})();
+        for(const itm in values){
+            const{difficulty, type} = values[itm];
+            list.difficulty.push(difficulty);
+            list.type.push(type);
+        }
+        for(const key in list) list[key]=[...(new Set(list[key]))];
+        return [{name:'Difficulty', val:list.difficulty}, {name:'Type', val:list.type}];
     }catch(err){
         throw err;
     }
@@ -27,57 +45,22 @@ const getWorkoutById = async(workoutId) => {
     }
 }
 
-const createNewWorkoutForUser = async(bodyPartId, userId, workoutData) => {
-    const session = await Mongoose.startSession();
-    try{
-        session.startTransaction();
-        const existingIds = (await Workout.find().select('workoutId')).map(Id=>Id.workoutId);
-        const workoutId = await CommonQueries.generateUniqueId(existingIds, existingIds.lenght+1);
-        const workoutDetails = new Workout({
-            workoutId:workoutId,
-            name:workoutData.name,
-            age:workoutData.age,
-            gender:workoutData.gender,
-            period:process.env.WORKOUT_DURATION,
-            bodyPartId:bodyPartId,
-            exercises:workoutData.exersiceList
-        });
-        // await BodyPartQueries.updateWorkoutList(bodyPartId, workoutId);
-        const time = await calculateTime(workoutId);
-        await UserQueries.selectNewWorkout(userId, workoutId, time);
-        workoutDetails.save();
-        await session.commitTransaction();
-    }catch(err){
-        await session.abortTransaction();
-        throw err;
-    }finally{
-        await session.endSession();
-    }
+const getWorkoutId = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const createNewWorkout = async(bodyPartId, workoutData) => {
-    const session = await Mongoose.startSession();
+const createNewWorkoutForUser = async(userId, workoutData, name) => {
     try{
-        session.startSession();
-        const existingIds = (await Workout.find().select('workoutId')).map(Id=>Id.workoutId);
-        const workoutId = await CommonQueries.generateUniqueId(existingIds, existingIds.lenght+1);
-        const workoutDetails = new Workout({
-            workoutId:workoutId,
-            name:workoutData.name,
-            age:workoutData.age,
-            gender:workoutData.gender,
-            period:process.env.WORKOUT_DURATION,
-            bodyPartId:bodyPartId,
-            exercises:workoutData.exersiceList
-        });
-        workoutDetails.save();
-        await BodyPartQueries.updateWorkoutList(bodyPartId, workoutId);
-        await session.commitTransaction();
+        const workoutId = getWorkoutId(1, 100);
+        await User.findOneAndUpdate(
+            {userId:userId},
+            {$addToSet:{workouts:{'workoutId':workoutId, 'name':name, 'exerciseList':workoutData.map(itm=>({id:itm.id, reps:itm.reps})), 'time':process.env.WORKOUT_DURATION, 'status':'Ongoing', 'executionTime':0}}},
+            {new:false}
+        ) || (()=>{throw new Error('userId not found or workout exists');})();
     }catch(err){
-        await session.abortTransaction();
         throw err;
-    }finally{
-        await session.endSession();
     }
 }
 
@@ -90,4 +73,4 @@ const calculateTime = async(workoutId) => {
     }
 }
 
-export const WorkoutQueries = {calculateTime, createNewWorkout, createNewWorkoutForUser, getWorkoutById, getWorkoutByRules};
+export const WorkoutQueries = {getWorkoutSortKeys, calculateTime, createNewWorkoutForUser, getWorkoutById, getWorkoutByRules};

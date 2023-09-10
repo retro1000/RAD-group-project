@@ -1,0 +1,11 @@
+/* carouselStyles.css */
+.carousel img {
+    max-width: 100%; /* Adjust the max-width as needed */
+    max-height: 300px; /* Adjust the max-height as needed */
+    display: block; /* Remove any extra space around the image */
+    margin: 0 auto; /* Center the image horizontally */
+  }
+  
+  .wholebar {
+    max-width: 50%;
+  }

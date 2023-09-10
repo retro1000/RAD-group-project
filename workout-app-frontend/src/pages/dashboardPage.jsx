@@ -3,6 +3,8 @@ import NavBar from "../components/navbar";
 import Display from "../components/display";
 import AboutUs from "../components/aboutUs";
 import Loading from "../components/loading";
+import Bio from "../components/bio";
+import BmiCalculator from "../components/bmical";
 
 function DashboardPage(){
 
@@ -56,10 +58,13 @@ function DashboardPage(){
 
     return(
         <div>
-            <div style={{pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
+            <div style={{display:'flex', flexDirection:'column', pointerEvents:(loading)?'none':null, filter:(loading)?'blur(1px)':null}}>
                 <NavBar realPage={realPage} currentPage={(!scrollInAboutUs)?'dashboard':'about_us'} handleLoading={handleLoading} scrollLocation={scrollRef} handleScrollAboutUs={handleScrollAboutUs} handleScrollUp={handleScrollUp}/>
-                <Display footerOn={true} handleLoading={handleLoading}>
-                    
+                <Display footerOn={false} handleLoading={handleLoading}>
+                    <div style={{background:'white', width:'1000px', height:'auto', padding:'20px', borderRadius:'10px', display:'flex', flexDirection:'column', justifyContent:'top', alignItems:'center'}}>
+                        <Bio handleLoading={handleLoading} loading={loading}/>
+                        <BmiCalculator />
+                    </div>
                 </Display>
                 <AboutUs getLocation={getLocation}/>
             </div>

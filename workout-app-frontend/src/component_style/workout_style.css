@@ -1,0 +1,88 @@
+.workout-card {
+    display: flex; /* Display children in a row */
+    align-items: center;
+    justify-content: space-between; /* Vertically center the content */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a box shadow for 3D effect */
+    padding: 20px; /* Add padding for spacing */
+    margin: 10px;
+    max-height: 200px;
+    height: 75%;
+    gap: 100px;
+    background: linear-gradient(45deg, rgb(18, 113, 185), rgb(33, 137, 45));
+    z-index: 1; /* Add margin for spacing between cards */
+    width: 800px;
+  }
+  
+  .workout-image {
+    max-width: 200px;
+    width: 100%;/* Limit image width */
+    max-height: 200px; 
+    height: 100%;/* Limit image height */
+    margin-right: 20px;
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);  /* Add margin between image and details */
+  }
+  
+  /* Style for workout details */
+  
+  /* Style for buttons and status label */
+  .buttons-status {
+    display: flex; /* Display buttons and status label in a row */
+    align-items: center; 
+    width: 180px;
+    /* Vertically center buttons and label */
+  }
+  
+  .start-button,
+  .view-button {
+    /* margin-right: 25px; */
+    padding: 10px; /* Add padding to increase clickable area */
+    background-color: #007BFF; /* Set button background color */
+    color: #FFFFFF; /* Set button text color */
+    border: 2px solid #007BFF;
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    width: 100px;  /* Reduce font size for better fit */
+  }
+  
+  .start-button:hover,
+  .view-button:hover {
+    background-color: #0056b3; /* Darken the background color on hover */
+    transform: scale(1.05); /* Add a slight scaling effect on hover */
+  }
+  
+.start-button:active,
+.view-button:active {
+  background-color: #004080; /* Darker background when clicked */
+  transform: scale(0.20); /* Slightly scale down when clicked */
+}
+  
+  /* Style for status label */
+  .status-label {
+    font-weight: bolder;
+    font-size: 20px;
+    margin-left: 25px;
+    font-family: Helvetica, Arial, sans-serif; /* Specify a font family (with fallbacks) */
+    color: #000000;
+    font-style: italic; /* Set the desired color (adjust as needed) */
+  }
+
+ 
+
+  .workout-name{
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  
+
+  
+  
+  

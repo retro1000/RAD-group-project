@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState} from 'react';
 import "../component_style/login_style.css";
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
@@ -39,7 +39,7 @@ function Login(props) {
                 username:username.current.value,
                 password:password.current.value,
                 remember_me:rememberme
-            }, {maxRedirects: 0})
+            }, {maxRedirects: 0, withCredentials:true})
                 .then(response => {
                     props.handleLoading(false);
                     console.log(response);

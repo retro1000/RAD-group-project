@@ -5,7 +5,7 @@ import { Middleware } from '../config/middleware.config.js';
 const router = express.Router();
 
 
-router.route('/').get(Middleware.ensureAuthenticated, Middleware.requireRoleCheck(['admin']), async(req, res) => {
+router.route('/').get(Middleware.ensureAuthenticated, async(req, res) => {
     try{
         return res.status(200).json(await RoleQueries.getAllRoles());
     }catch(err){

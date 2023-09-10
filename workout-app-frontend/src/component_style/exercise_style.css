@@ -1,0 +1,99 @@
+.exercise-card {
+  display: flex; /* Display children in a row */
+  align-items: center;
+  justify-content: space-between; /* Vertically center the content */
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a box shadow for 3D effect */
+  padding: 20px; /* Add padding for spacing */
+  margin: 10px;
+  max-height: 180px;
+  height: 75%;
+  width: 1000px;
+  gap: 10px;
+  background: rgb(90, 116, 127);
+  /* background: linear-gradient(45deg, rgb(8, 200, 238), rgb(169, 200, 13)); */
+  z-index: 1; /* Add margin for spacing between cards */
+}
+
+/* Style for the workout image */
+.exercise-image {
+  max-width: 200px;
+  width: 100%; /* Limit image width */
+  max-height: 200px;
+  height: 100%; /* Limit image height */
+  margin-right: 20px;
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add margin between image and details */
+}
+
+/* Style for workout details */
+
+/* Style for buttons and status label */
+.exercise-status {
+  display: flex; /* Display buttons and status label in a row */
+  align-items: center;
+}
+
+.buttons-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-button {
+  width: 60px;
+  height: 40px;
+  margin: 5px;
+  padding: 10px;
+  background-color: #007bff; /* Set button background color */
+  color: #ffffff; /* Set button text color */
+  border: 2px solid #007bff;
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s, transform 0.2s;
+  font-weight: bold;
+  font-size: 20px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1); /* Reduce font size for better fit */
+}
+
+.view-button:hover {
+  background-color: #0056b3; /* Darken the background color on hover */
+  transform: scale(1.05); /* Add a slight scaling effect on hover */
+}
+
+.view-button:active {
+  transform: scale(0.8); /* Slightly scale down when clicked */
+}
+
+.exercise-name {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Style for the .workout-days container */
+.reps {
+  display: flex; /* Display elements in a row */
+  align-items: center;
+  width: max-content;
+  gap: 10px; /* Vertically center elements */
+}
+
+/* Style for the label */
+.reps label {
+  margin-right: 10px;
+  font-size: 18px;
+  width: max-content; /* Add a margin between the label and span */
+}
+
+/* Style for the span container */
+.reps span {
+  background-color: #007bff; /* Set background color */
+  color: #ffffff; /* Set text color */
+  padding: 5px 10px; /* Add padding for spacing around the number */
+  border-radius: 5px; /* Add rounded corners */
+  font-size: 24px;
+  margin-left: -10px; /* Set font size */
+}
