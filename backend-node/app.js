@@ -25,7 +25,7 @@ mongoose
     // "mongodb+srv://has:has123@icollegelms.vpl6dxd.mongodb.net/?retryWrites=true&w=majority"
     "mongodb+srv://damithajayawardana677:t2Uvec1uWbfZXTL3@cluster1.qogqvmz.mongodb.net/?retryWrites=true&w=majority"
   )
-  .then(() => console.log("Connected to database"))
+  .then(() => console.log("Connected to database successfully"))
   .then(() => {
     app.listen(5000);
   })
