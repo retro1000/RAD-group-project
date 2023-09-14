@@ -14,14 +14,14 @@ const LibararyItemForm = () => {
   //const [subjectList, setSubjectList] = useState([]);
 
   useEffect(() => {
-    // console.log("hiii");
+   
 
     // SubjectService.getAllSubject().then((res)=>{
     //   setSubjectList(res.data);
     // })
 
     // selectFaculty();
-    // console.log("fac",faculty);
+    
 
     if (id) {
       LibraryService.getItemById(id).then((res) => {
