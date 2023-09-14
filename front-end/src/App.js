@@ -103,10 +103,6 @@ function App() {
             <Route path="/login" element={<LoginForm />} exact />
             <Route path="/users" element={<UserList />} exact />
 
-            {/* <Route path="/Lecture" element={<LectureHome />} exact /> */}
-            {/* <Route path="/Lecture/AddLecture" element={<AddLecture />} exact />
-            <Route path="/Lecture/:Id" element={<ViewLectureT />} exact /> */}
-
             <Route path="/Lecture" element={<LectureHome />} exact />
             <Route path="/Lecture/AddLecture" element={<AddLecture />} exact />
             <Route path="/Lecture/:id" element={<ViewLecture />} exact />
